@@ -4,14 +4,25 @@ import java.util.ArrayList;
 
 public class User {
 
+	int id;
 	String username;
 	String password;
-	ArrayList<Challenge> subChals;
+	boolean admin;
+	ArrayList<Challenge> challenges;
 
-	public User(String username, String password) {
+	public User(int id, String username, String password) {
 		this.username = username;
 		this.password = password;
-		this.subChals = new ArrayList<Challenge>();
+		this.admin= false;
+		this.challenges = new ArrayList<Challenge>();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -30,26 +41,34 @@ public class User {
 		this.password = password;
 	}
 
-	public ArrayList<Challenge> getSubChals() {
-		return subChals;
+	public boolean isAdmin() {
+		return admin;
 	}
 
-	public void setSubChals(ArrayList<Challenge> subChals) {
-		this.subChals = subChals;
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+	public ArrayList<Challenge> getChallenges() {
+		return challenges;
+	}
+
+	public void setChallenges(ArrayList<Challenge> challenges) {
+		this.challenges = challenges;
 	}
 
 	public void addChallenge(Challenge chal) {
-		this.subChals.add(chal);
+		this.challenges.add(chal);
 	}
 
 	public void deleteChallenge(Challenge chal) {
-		this.subChals.remove(chal);
+		this.challenges.remove(chal);
 	}
 
 	public String chalsToString() {
 		String result = "{";
-		for (Challenge chal : subChals) {
-			if (chal.getId() == subChals.get(subChals.size() - 1).getId())
+		for (Challenge chal : challenges) {
+			if (chal.getId() == challenges.get(challenges.size() - 1).getId())
 				result += "chal" + chal.getId() + ": " + chal.getName();
 			else
 				result += "chal" + chal.getId() + ": " + chal.getName() + ", ";

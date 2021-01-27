@@ -17,6 +17,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.uha.ensisa.fanfan.APIfit.model.Challenge;
+import org.uha.ensisa.fanfan.APIfit.model.Suggestion;
 import org.uha.ensisa.fanfan.APIfit.model.User;
 
 /**
@@ -27,48 +28,89 @@ public class MyResource {
 
 	ArrayList<Challenge> chals;
 	ArrayList<User> users;
+	ArrayList<Suggestion> sugs;
 
 	public MyResource() {
 		this.chals = new ArrayList<Challenge>();
-		this.chals.add(new Challenge(1, "Raid de Kessel"));
-		this.chals.add(new Challenge(2, "De la Comté au Mordor"));
+		this.chals.add(new Challenge(0, "Raid de Kessel", null));
+		this.chals.add(new Challenge(1, "De la Comté au Mordor", null));
 		this.users = new ArrayList<User>();
-		this.users.add(new User("Jean", "naej42"));
+		this.users.add(new User(0, "Jean", "naej42"));
 		this.users.get(0).addChallenge(chals.get(0));
+		this.users.get(0).setAdmin(true);
+
+		this.sugs = new ArrayList<Suggestion>();
+		this.sugs.add(new Suggestion(0, "Jean", "Hunger Games"));
 	}
 
 	/*************************** UTILITY *************************************/
-	
+
+	public String arrayToJson(ArrayList list) {
+		String result = "{";
+		for (Object obj : list) {
+			result += obj.toString();
+		}
+		result += "}";
+		return result;
+	}
+
 	public User getUser(String username) {
-		for(User user : users) {
-			if(user.getUsername().equals(username)) {
+		for (User user : users) {
+			if (user.getUsername().equals(username)) {
 				return user;
 			}
 		}
 		return null;
 	}
-	
+
+	public User getUser(int id) {
+		for (User user : users) {
+			if (user.getId() == id) {
+				return user;
+			}
+		}
+		return null;
+	}
+
 	public boolean existUser(String username) {
-		for(User user : users) {
-			if(user.getUsername().equals(username)) {
+		for (User user : users) {
+			if (user.getUsername().equals(username)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	public Challenge getChal(Integer chalId) {
-		for(Challenge chal : chals) {
-			if(chal.getId()== chalId) {
+		for (Challenge chal : chals) {
+			if (chal.getId() == chalId) {
 				return chal;
 			}
 		}
 		return null;
 	}
-	
+
 	public boolean existChal(Integer chalId) {
-		for(Challenge chal : chals) {
-			if(chal.getId()== chalId) {
+		for (Challenge chal : chals) {
+			if (chal.getId() == chalId) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Suggestion getSug(int sugId) {
+		for (Suggestion sug : sugs) {
+			if (sug.getId() == sugId) {
+				return sug;
+			}
+		}
+		return null;
+	}
+
+	public boolean existSug(int sugId) {
+		for (Suggestion sug : sugs) {
+			if (sug.getId() == sugId) {
 				return true;
 			}
 		}
@@ -85,12 +127,7 @@ public class MyResource {
 	@Path("/challenges/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getChallenges() {
-		String result = "{";
-		for (Challenge chal : chals) {
-			result += "{" + "chalNum: " + chal.getId() + ", " + "chalName: " + chal.getName() + "}";
-		}
-		result += "}";
-		return result;
+		return arrayToJson(chals);
 	}
 
 	/**
@@ -104,12 +141,7 @@ public class MyResource {
 	@Path("/challenges/{id}/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getChallenges(@PathParam("id") int id) {
-		String result = "";
-		for (Challenge chal : chals) {
-			if (id == chal.getId())
-				result += "{" + "chalNum: " + chal.getId() + ", " + "chalName: " + chal.getName() + "}";
-		}
-		return result;
+		return getChal(id).toString();
 	}
 
 	/**
@@ -132,11 +164,11 @@ public class MyResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String signUp(@Context HttpServletRequest request, @QueryParam("username") String username,
 			@QueryParam("password") String password) {
-			if (existUser(username))
-				return "username already taken";
+		if (existUser(username))
+			return "username already taken";
 		HttpSession session = request.getSession(true);
 		session.setAttribute("username", username);
-		users.add(new User(username, password));
+		users.add(new User(users.size(), username, password));
 		return "successfully registered and connected as : " + username + ", " + password;
 	}
 
@@ -158,7 +190,7 @@ public class MyResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String signIn(@Context HttpServletRequest request, @QueryParam("username") String username,
 			@QueryParam("password") String password) {
-		if(existUser(username)) {
+		if (existUser(username)) {
 			User user = getUser(username);
 			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
 				HttpSession session = request.getSession(true);
@@ -175,8 +207,6 @@ public class MyResource {
 	 * 
 	 * @param request (context request for session handling)
 	 * 
-	 *                Check if signed in
-	 * 
 	 *                Get session attribute "username"
 	 * 
 	 * @return user profile as an application/json object
@@ -189,7 +219,7 @@ public class MyResource {
 		String username = (String) session.getAttribute("username");
 		if (username == null)
 			return "you're not signed in";
-		if(existUser(username))
+		if (existUser(username))
 			return getUser(username).toString();
 		return "error, no profile found";
 	}
@@ -198,8 +228,6 @@ public class MyResource {
 	 * Disconnect the connected user
 	 * 
 	 * @param request (context request for session handling)
-	 * 
-	 *                Check if signed in
 	 * 
 	 *                Remove session attribute "username"
 	 * 
@@ -222,8 +250,6 @@ public class MyResource {
 	 * 
 	 * @param request (context request for session handling)
 	 * 
-	 *                Check if signed in
-	 * 
 	 *                Remove session attribute "username"
 	 * 
 	 *                Delete user data on db
@@ -239,7 +265,7 @@ public class MyResource {
 		if (username == null)
 			return "you're not signed in";
 		session.removeAttribute("username");
-		if(existUser(username))
+		if (existUser(username))
 			users.remove(getUser(username));
 		return "successfully removed profile";
 	}
@@ -247,10 +273,9 @@ public class MyResource {
 	/**
 	 * Modification of profile informations
 	 * 
+	 * @param request  (context request for session handling)
 	 * @param username (username query parameter)
 	 * @param password (password query parameter)
-	 * 
-	 *                 Check if signed in
 	 * 
 	 *                 Change profile data in db (here only password)
 	 * 
@@ -264,12 +289,21 @@ public class MyResource {
 		HttpSession session = request.getSession(true);
 		if (session.getAttribute("username") == null)
 			return "you're not signed in";
-		if(existUser(username))
+		if (existUser(username))
 			getUser(username).setPassword(password);
 		return "successfully updated : username = " + username + ", password = " + password;
 	}
 
-	// POST APIfit/subscribe?challenge={idC}
+	/**
+	 * Subscription to a challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param chalId  (id of challenge to subscribe to)
+	 * 
+	 *                Add challenge to user challenge list
+	 * 
+	 * @return subscribed challenges as an application/json object
+	 */
 	@POST
 	@Path("/subscribe/")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -278,11 +312,200 @@ public class MyResource {
 		String username = (String) session.getAttribute("username");
 		if (username == null)
 			return "you're not signed in";
-		if(existChal(chalId)) {
-			if(existUser(username))
+		if (existChal(chalId)) {
+			if (existUser(username))
 				getUser(username).addChallenge(getChal(chalId));
 		}
-		return getUser(username).toString();
+		return getUser(username).chalsToString();
 	}
 
+	/**
+	 * Retrieve all challenges that the user is subscribed to
+	 * 
+	 * @param request (context request for session handling)
+	 * 
+	 * @return subscribed challenges as an application/json object
+	 */
+	@GET
+	@Path("/profile/progression/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String progression(@Context HttpServletRequest request) {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		return getUser(username).chalsToString();
+	}
+
+	// POST APIfit/challenges/suggest?theme={suggestion} : suggestion d’un thème de
+	// challenge
+	/**
+	 * Suggestion of a theme for a challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param theme   (theme query parameter)
+	 * 
+	 *                Add the suggestion to suggestion list
+	 * 
+	 * @return the suggestion as an application/json object
+	 */
+	@POST
+	@Path("/challenges/suggest")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String suggest(@Context HttpServletRequest request, @QueryParam("theme") String theme) {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		sugs.add(new Suggestion(sugs.get(sugs.size() - 1).getId() + 1, username, theme));
+		return sugs.get(sugs.size() - 1).toString();
+	}
+
+	/*************************** ADMIN **************************************/
+	/**
+	 * Get all users
+	 * 
+	 * @param request (context request for session handling)
+	 * 
+	 * @return all users as an application/json object
+	 */
+	@GET
+	@Path("/users/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getUsers(@Context HttpServletRequest request) {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin())
+			return arrayToJson(users);
+		else
+			return "not authorized";
+	}
+
+	/**
+	 * Retrieve targeted user
+	 * 
+	 * @param request (context request for session handling)
+	 * @param id      (user id path parameter)
+	 * 
+	 * @return the user as an application/json object
+	 */
+	@GET
+	@Path("/users/{id}/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getUser(@Context HttpServletRequest request, @PathParam("id") int id) {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin())
+			return getUser(id).toString();
+
+		else
+			return "not authorized";
+	}
+
+	/**
+	 * Delete targeted user
+	 * 
+	 * @param request (context request for session handling)
+	 * @param id      (user id path parameter)
+	 * 
+	 * @return remaining users as an application/json response
+	 */
+	@DELETE
+	@Path("/users/{id}/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String deleteUser(@Context HttpServletRequest request, @PathParam("id") int id) {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			users.remove(getUser(id));
+			return arrayToJson(users);
+		} else
+			return "not authorized";
+	}
+
+	/**
+	 * Modification of user informations
+	 * 
+	 * @param request  (context request for session handling)
+	 * @param password (password query parameter)
+	 * 
+	 *                 Change user data in db (here only password)
+	 * 
+	 * @return the user as an application/json object
+	 */
+	@PUT
+	@Path("/users/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String updateUser(@Context HttpServletRequest request, @PathParam("id") int id,
+			@QueryParam("password") String password) {
+		HttpSession session = request.getSession(true);
+		String name = (String) session.getAttribute("username");
+		if (name == null)
+			return "you're not signed in";
+		if (getUser(name).isAdmin()) {
+			getUser(id).setPassword(password);
+			return getUser(id).toString();
+		} else
+			return "not authorized";
+	}
+
+	/**
+	 * Create a challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param name    (challenge name query parameter)
+	 * @param desc    (description query parameter)
+	 * 
+	 *                Add challenge to list
+	 * 
+	 * @return created challenge as an application/json object
+	 */
+	@POST
+	@Path("/challenges/create")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String addChallenge(@Context HttpServletRequest request, @QueryParam("name") String name,
+			@QueryParam("desc") String desc) {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			chals.add(new Challenge((chals.get(chals.size() - 1).getId() + 1), name, desc));
+			return chals.get(chals.size() - 1).toString();
+		} else
+			return "not authorized";
+	}
+
+	/**
+	 * Modify the number of player for a specific challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param id      (challenge id path parameter)
+	 * @param players (players number query parameter)
+	 * 
+	 *                Set the max player number
+	 * 
+	 * @return the modified challenge as an application/json object
+	 */
+	@PUT
+	@Path("/challenges/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String modifyChallenge(@Context HttpServletRequest request, @PathParam("id") int id,
+			@QueryParam("players") int players) {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			getChal(id).setPlayers(players);
+			return getChal(id).toString();
+		} else
+			return "not authorized";
+	}	
 }
