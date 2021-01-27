@@ -16,18 +16,63 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import org.uha.ensisa.fanfan.APIfit.model.Challenge;
+import org.uha.ensisa.fanfan.APIfit.model.User;
+
 /**
  * Root resource (exposed at "/" path)
  */
 @Path("/")
 public class MyResource {
 
-	ArrayList<String> chals;
+	ArrayList<Challenge> chals;
+	ArrayList<User> users;
 
 	public MyResource() {
-		this.chals = new ArrayList<String>();
-		this.chals.add("Raid de Kessel");
-		this.chals.add("De la Comté au Mordor");
+		this.chals = new ArrayList<Challenge>();
+		this.chals.add(new Challenge(1, "Raid de Kessel"));
+		this.chals.add(new Challenge(2, "De la Comté au Mordor"));
+		this.users = new ArrayList<User>();
+		this.users.add(new User("Jean", "naej42"));
+		this.users.get(0).addChallenge(chals.get(0));
+	}
+
+	/*************************** UTILITY *************************************/
+	
+	public User getUser(String username) {
+		for(User user : users) {
+			if(user.getUsername().equals(username)) {
+				return user;
+			}
+		}
+		return null;
+	}
+	
+	public boolean existUser(String username) {
+		for(User user : users) {
+			if(user.getUsername().equals(username)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Challenge getChal(Integer chalId) {
+		for(Challenge chal : chals) {
+			if(chal.getId()== chalId) {
+				return chal;
+			}
+		}
+		return null;
+	}
+	
+	public boolean existChal(Integer chalId) {
+		for(Challenge chal : chals) {
+			if(chal.getId()== chalId) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/*************************** PUBLIC **************************************/
@@ -41,8 +86,8 @@ public class MyResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getChallenges() {
 		String result = "{";
-		for (int i = 0; i < chals.size(); i++) {
-			result += "{" + "chalNum: " + i + ", " + "chalName: " + chals.get(i) + "}";
+		for (Challenge chal : chals) {
+			result += "{" + "chalNum: " + chal.getId() + ", " + "chalName: " + chal.getName() + "}";
 		}
 		result += "}";
 		return result;
@@ -60,9 +105,9 @@ public class MyResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getChallenges(@PathParam("id") int id) {
 		String result = "";
-		for (int i = 0; i < chals.size(); i++) {
-			if (id == i)
-				result += "{" + "chalNum: " + i + ", " + "chalName: " + chals.get(i) + "}";
+		for (Challenge chal : chals) {
+			if (id == chal.getId())
+				result += "{" + "chalNum: " + chal.getId() + ", " + "chalName: " + chal.getName() + "}";
 		}
 		return result;
 	}
@@ -87,10 +132,11 @@ public class MyResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String signUp(@Context HttpServletRequest request, @QueryParam("username") String username,
 			@QueryParam("password") String password) {
-		// TODO check if username in db
+			if (existUser(username))
+				return "username already taken";
 		HttpSession session = request.getSession(true);
 		session.setAttribute("username", username);
-		// TODO DATABASE ADD USER
+		users.add(new User(username, password));
 		return "successfully registered and connected as : " + username + ", " + password;
 	}
 
@@ -112,10 +158,15 @@ public class MyResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String signIn(@Context HttpServletRequest request, @QueryParam("username") String username,
 			@QueryParam("password") String password) {
-		// TODO check if username and password in db
-		HttpSession session = request.getSession(true);
-		session.setAttribute("username", username);
-		return "successfully connected as : " + username + ", " + password;
+		if(existUser(username)) {
+			User user = getUser(username);
+			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+				HttpSession session = request.getSession(true);
+				session.setAttribute("username", username);
+				return "successfully connected as : " + username + ", " + password;
+			}
+		}
+		return "wrong username or password";
 	}
 
 	/*************************** JOUEUR **************************************/
@@ -123,6 +174,8 @@ public class MyResource {
 	 * Get profile of the connected user
 	 * 
 	 * @param request (context request for session handling)
+	 * 
+	 *                Check if signed in
 	 * 
 	 *                Get session attribute "username"
 	 * 
@@ -133,14 +186,20 @@ public class MyResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getProfile(@Context HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
-		String username = "{" + "username: " + (String) session.getAttribute("username") + "}";
-		return username;
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if(existUser(username))
+			return getUser(username).toString();
+		return "error, no profile found";
 	}
 
 	/**
 	 * Disconnect the connected user
 	 * 
 	 * @param request (context request for session handling)
+	 * 
+	 *                Check if signed in
 	 * 
 	 *                Remove session attribute "username"
 	 * 
@@ -151,6 +210,9 @@ public class MyResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String signOUt(@Context HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
 		session.removeAttribute("username");
 		return "successfully disconnected";
 	}
@@ -159,6 +221,8 @@ public class MyResource {
 	 * Remove profile of connected user
 	 * 
 	 * @param request (context request for session handling)
+	 * 
+	 *                Check if signed in
 	 * 
 	 *                Remove session attribute "username"
 	 * 
@@ -171,9 +235,54 @@ public class MyResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String deleteProfile(@Context HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
 		session.removeAttribute("username");
-		// TODO DATABASE REMOVE USER
+		if(existUser(username))
+			users.remove(getUser(username));
 		return "successfully removed profile";
+	}
+
+	/**
+	 * Modification of profile informations
+	 * 
+	 * @param username (username query parameter)
+	 * @param password (password query parameter)
+	 * 
+	 *                 Check if signed in
+	 * 
+	 *                 Change profile data in db (here only password)
+	 * 
+	 * @return a message as text/plain to confirm updating the profile
+	 */
+	@PUT
+	@Path("/profile/")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String updateProfile(@Context HttpServletRequest request, @QueryParam("username") String username,
+			@QueryParam("password") String password) {
+		HttpSession session = request.getSession(true);
+		if (session.getAttribute("username") == null)
+			return "you're not signed in";
+		if(existUser(username))
+			getUser(username).setPassword(password);
+		return "successfully updated : username = " + username + ", password = " + password;
+	}
+
+	// POST APIfit/subscribe?challenge={idC}
+	@POST
+	@Path("/subscribe/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String subChallenge(@Context HttpServletRequest request, @QueryParam("challenge") int chalId) {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if(existChal(chalId)) {
+			if(existUser(username))
+				getUser(username).addChallenge(getChal(chalId));
+		}
+		return getUser(username).toString();
 	}
 
 }
