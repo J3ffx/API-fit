@@ -2,19 +2,37 @@ package org.uha.ensisa.fanfan.APIfit.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
+
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	int id;
 	String username;
 	String password;
 	boolean admin;
-	ArrayList<Challenge> challenges;
+	@ElementCollection  
+	ArrayList<Integer> challenges;
 
-	public User(int id, String username, String password) {
+	public User() {
+	}
+	
+	public User(int id, String username, String password, boolean admin, Integer chalId) {
 		this.username = username;
 		this.password = password;
-		this.admin= false;
-		this.challenges = new ArrayList<Challenge>();
+		this.admin= admin;
+		this.challenges = new ArrayList<Integer>();
+		if(chalId != null)this.challenges.add(chalId);
 	}
 
 	public int getId() {
@@ -49,29 +67,29 @@ public class User {
 		this.admin = admin;
 	}
 
-	public ArrayList<Challenge> getChallenges() {
+	public ArrayList<Integer> getChallenges() {
 		return challenges;
 	}
 
-	public void setChallenges(ArrayList<Challenge> challenges) {
+	public void setChallenges(ArrayList<Integer> challenges) {
 		this.challenges = challenges;
 	}
 
-	public void addChallenge(Challenge chal) {
-		this.challenges.add(chal);
+	public void addChallenge(Integer chalId) {
+		this.challenges.add(chalId);
 	}
 
-	public void deleteChallenge(Challenge chal) {
-		this.challenges.remove(chal);
+	public void deleteChallenge(Integer chalId) {
+		this.challenges.remove(chalId);
 	}
 
 	public String chalsToString() {
 		String result = "{";
-		for (Challenge chal : challenges) {
-			if (chal.getId() == challenges.get(challenges.size() - 1).getId())
-				result += "chal" + chal.getId() + ": " + chal.getName();
+		for (Integer chal : challenges) {
+			if (chal == challenges.get(challenges.size() - 1))
+				result += "chalId: " + chal;
 			else
-				result += "chal" + chal.getId() + ": " + chal.getName() + ", ";
+				result += "chalId: " + chal + ", ";
 		}
 		result += "}";
 		return result;

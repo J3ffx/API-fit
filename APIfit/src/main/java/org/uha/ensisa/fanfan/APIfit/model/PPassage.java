@@ -1,21 +1,25 @@
 package org.uha.ensisa.fanfan.APIfit.model;
 
-import java.util.ArrayList;
+import javax.persistence.Embeddable;
 
+@Embeddable
 public class PPassage {
-	ArrayList<Segment> segAv;
-	ArrayList<Segment> segAp;
+	
+	int ppid;
 	
 	public PPassage() {
-		this.segAv = new ArrayList<Segment>();
-		this.segAp = new ArrayList<Segment>();
+		
 	}
 	
-	public void addSegAv(Segment seg) {
-		this.segAv.add(seg);
+	public PPassage(int ppid) {
+		this.ppid = ppid;
 	}
 	
-	public void addSegAp(Segment seg) {
-		this.segAp.add(seg);
+	public int getPpid() {
+		return ppid;
+	}
+
+	public void setPpid(int ppid) {
+		this.ppid = ppid;
 	}
 }

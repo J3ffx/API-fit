@@ -1,10 +1,25 @@
 package org.uha.ensisa.fanfan.APIfit.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
+
 public class Suggestion {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	int id;
 	String username;
 	String theme;
+	
+	public Suggestion() {
+	}
 	
 	public Suggestion(int id, String username, String theme) {
 		this.id = id;

@@ -1,17 +1,40 @@
 package org.uha.ensisa.fanfan.APIfit.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Challenge {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	int id;
+	int cid;
 	String name;
 	int players;
-	String desc;
+	String description;
+	@ElementCollection
+	List<PPassage> pps = new ArrayList<PPassage>();
+	@ElementCollection
+	List<Segment> segs = new ArrayList<Segment>();
 	
-	public Challenge(int id, String name, String desc) {
-		this.id = id;
+	public Challenge() {
+	}
+	
+	public Challenge(int cid, String name, String desc) {
+		this.cid = cid;
 		this.name = name;
 		this.players = 1;
-		this.desc = desc;
+		this.description = desc;
 		/*
 		PPassage start = new PPassage();
 		PPassage finish = new PPassage();
@@ -29,12 +52,12 @@ public class Challenge {
 		*/
 	}
 
-	public int getId() {
-		return id;
+	public int getCid() {
+		return cid;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setCid(int cid) {
+		this.cid = cid;
 	}
 
 	public String getName() {
@@ -53,9 +76,41 @@ public class Challenge {
 		this.players = players;
 	}
 
+	public void addPP(PPassage pp) {
+		this.pps.add(pp);
+	}
+	
+	public void addSeg(Segment seg) {
+		this.segs.add(seg);
+	}
+	
+	public String getDesc() {
+		return description;
+	}
+
+	public void setDesc(String desc) {
+		this.description = desc;
+	}
+
+	public List<PPassage> getPps() {
+		return pps;
+	}
+
+	public void setPps(List<PPassage> pps) {
+		this.pps = pps;
+	}
+
+	public List<Segment> getSegs() {
+		return segs;
+	}
+
+	public void setSegs(List<Segment> segs) {
+		this.segs = segs;
+	}
+
 	@Override
 	public String toString() {
-		return "{id: " + id + ", name: " + name + ", players: " + players + ", description: "+ desc +"}";
+		return "{cid: " + cid + ", name: " + name + ", players: " + players + ", description: "+ description +"}";
 	}
 	
 	

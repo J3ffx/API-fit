@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="APIfit" transaction-type="JTA">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+	
+		<jta-data-source>jdbc/aiaapi</jta-data-source>
+		
+		<class>org.uha.ensisa.fanfan.APIfit.model.Challenge</class>
+		<class>org.uha.ensisa.fanfan.APIfit.model.User</class>
+		<class>org.uha.ensisa.fanfan.APIfit.model.Suggestion</class>
+		<class>org.uha.ensisa.fanfan.APIfit.model.Segment</class>
+		<class>org.uha.ensisa.fanfan.APIfit.model.PPassage</class>
+		<class>org.uha.ensisa.fanfan.APIfit.model.Obstacle</class>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<property name="eclipselink.ddl-generation"
+				value="create-tables" />
+		</properties>
+
+	</persistence-unit>
+	
+</persistence>
+
