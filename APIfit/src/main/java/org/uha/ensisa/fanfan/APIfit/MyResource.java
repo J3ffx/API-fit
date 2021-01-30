@@ -8,15 +8,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.PersistenceUtil;
-import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.transaction.HeuristicMixedException;
@@ -24,8 +16,6 @@ import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
 import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
-import javax.transaction.Transactional;
-import javax.transaction.UserTransaction;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -43,59 +33,12 @@ import org.uha.ensisa.fanfan.APIfit.model.User;
 @Path("/")
 public class MyResource {
 
-	List<Challenge> chals;
-	List<User> users;
-	List<Suggestion> sugs;
-
-	// @PersistenceUnit(unitName = "APIfit")
-	// private EntityManagerFactory emfactory =
-	// Persistence.createEntityManagerFactory("APIfit");
-
-	// @PersistenceContext(unitName = "APIfit")
-	// private EntityManager em;
-
-	public MyResource() throws NamingException, NotSupportedException, SystemException, SecurityException,
-			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
-
-		// UserTransaction transaction = (UserTransaction) new
-		// InitialContext().lookup("java:comp/UserTransaction");
-		// transaction.begin();
-
-		// EntityManager entitymanager = getEntityManager();
-
-		// Challenge chal1 = new Challenge(0, "Raid de Kessel", "Pas facile");
-		// Challenge chal2 = new Challenge(1, "De la Comté au Mordor", "Un peu dur");
-
-		// User user1 = new User(0, "Jean", "naej42", true, 0);
-
-		// Suggestion sug1 = new Suggestion(0, "Jean", "Hunger Games");
-
-		// entitymanager.persist(chal1);
-		// entitymanager.persist(chal2);
-		// entitymanager.persist(user1);
-		// entitymanager.persist(sug1);
-		// transaction.commit();
-
-		// TypedQuery<Challenge> queryChal = entitymanager.createQuery("from Challenge
-		// c", Challenge.class);
-		// chals = queryChal.getResultList();
-		// TypedQuery<User> queryUser = entitymanager.createQuery("from User u",
-		// User.class);
-		// users = queryUser.getResultList();
-		// TypedQuery<Suggestion> querySug = entitymanager.createQuery("from Suggestion
-		// s", Suggestion.class);
-		// sugs = querySug.getResultList();
-
+	public MyResource() {
 	}
-
-	// @Transactional(dontRollbackOn = Exception.class)
-	// private EntityManager getEntityManager() {
-	// em = emfactory.createEntityManager();
-	// return em;
-	// }
 
 	/*************************** UTILITY *************************************/
 
+	@SuppressWarnings("rawtypes")
 	public String arrayToJson(List list) {
 		String result = "{";
 		for (Object obj : list) {
@@ -179,20 +122,25 @@ public class MyResource {
 		return cs;
 	}
 
-	/***************************
-	 * PUBLIC
-	 * 
-	 * @throws NamingException
-	 **************************************/
+	/**************************** PUBLIC**************************************/
 
+	/**
+	 * Home page
+	 * 
+	 * @return an example of route
+	 * @throws SecurityException
+	 * @throws IllegalStateException
+	 * @throws NotSupportedException
+	 * @throws SystemException
+	 * @throws RollbackException
+	 * @throws HeuristicMixedException
+	 * @throws HeuristicRollbackException
+	 * @throws NamingException
+	 */
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	public String getHome() throws SecurityException, IllegalStateException, NotSupportedException, SystemException,
-			RollbackException, HeuristicMixedException, HeuristicRollbackException, NamingException {
-		PersistenceUtil pu = Persistence.getPersistenceUtil();
-		// Challenge chal = new Challenge(2, "Hunger Games", "Pas trop dur");
-		// DAO.addChal(chal);
-		return "" + pu.isLoaded(Challenge.class) + DAO.getChals();
+	public String getHome() {
+		return "try APIfit/challenges";
 	}
 
 	/**
@@ -481,6 +429,7 @@ public class MyResource {
 			return "you're not signed in";
 		List<Suggestion> sugs = DAO.getSugs();
 		DAO.addSug(new Suggestion(sugs.get(sugs.size() - 1).getId() + 1, username, theme));
+		sugs = DAO.getSugs();
 		return sugs.get(sugs.size() - 1).toString();
 	}
 
@@ -630,6 +579,7 @@ public class MyResource {
 		if (getUser(username).isAdmin()) {
 			List<Challenge> chals = DAO.getChals();
 			DAO.addChal(new Challenge((chals.get(chals.size() - 1).getCid() + 1), name, desc));
+			chals = DAO.getChals();
 			return chals.get(chals.size() - 1).toString();
 		} else
 			return "not authorized";
