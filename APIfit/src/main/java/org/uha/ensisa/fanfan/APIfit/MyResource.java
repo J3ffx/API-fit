@@ -122,7 +122,7 @@ public class MyResource {
 		return cs;
 	}
 
-	/**************************** PUBLIC**************************************/
+	/**************************** PUBLIC **************************************/
 
 	/**
 	 * Home page
@@ -359,19 +359,21 @@ public class MyResource {
 	 *                Add challenge to user challenge list
 	 * 
 	 * @return subscribed challenges as an application/json object
-	 * @throws NamingException 
-	 * @throws HeuristicRollbackException 
-	 * @throws HeuristicMixedException 
-	 * @throws RollbackException 
-	 * @throws SystemException 
-	 * @throws NotSupportedException 
-	 * @throws IllegalStateException 
-	 * @throws SecurityException 
+	 * @throws NamingException
+	 * @throws HeuristicRollbackException
+	 * @throws HeuristicMixedException
+	 * @throws RollbackException
+	 * @throws SystemException
+	 * @throws NotSupportedException
+	 * @throws IllegalStateException
+	 * @throws SecurityException
 	 */
 	@POST
 	@Path("/subscribe/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String subChallenge(@Context HttpServletRequest request, @QueryParam("challenge") int chalId) throws SecurityException, IllegalStateException, NotSupportedException, SystemException, RollbackException, HeuristicMixedException, HeuristicRollbackException, NamingException {
+	public String subChallenge(@Context HttpServletRequest request, @QueryParam("challenge") int chalId)
+			throws SecurityException, IllegalStateException, NotSupportedException, SystemException, RollbackException,
+			HeuristicMixedException, HeuristicRollbackException, NamingException {
 		HttpSession session = request.getSession(true);
 		String username = (String) session.getAttribute("username");
 		if (username == null)
@@ -410,19 +412,21 @@ public class MyResource {
 	 *                Add the suggestion to suggestion list
 	 * 
 	 * @return the suggestion as an application/json object
-	 * @throws NamingException 
-	 * @throws HeuristicRollbackException 
-	 * @throws HeuristicMixedException 
-	 * @throws RollbackException 
-	 * @throws SystemException 
-	 * @throws NotSupportedException 
-	 * @throws IllegalStateException 
-	 * @throws SecurityException 
+	 * @throws NamingException
+	 * @throws HeuristicRollbackException
+	 * @throws HeuristicMixedException
+	 * @throws RollbackException
+	 * @throws SystemException
+	 * @throws NotSupportedException
+	 * @throws IllegalStateException
+	 * @throws SecurityException
 	 */
 	@POST
-	@Path("/challenges/suggest")
+	@Path("/suggestion")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String suggest(@Context HttpServletRequest request, @QueryParam("theme") String theme) throws SecurityException, IllegalStateException, NotSupportedException, SystemException, RollbackException, HeuristicMixedException, HeuristicRollbackException, NamingException {
+	public String suggest(@Context HttpServletRequest request, @QueryParam("theme") String theme)
+			throws SecurityException, IllegalStateException, NotSupportedException, SystemException, RollbackException,
+			HeuristicMixedException, HeuristicRollbackException, NamingException {
 		HttpSession session = request.getSession(true);
 		String username = (String) session.getAttribute("username");
 		if (username == null)
@@ -567,7 +571,7 @@ public class MyResource {
 	 * @throws SecurityException
 	 */
 	@POST
-	@Path("/challenges/create")
+	@Path("/challenges/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addChallenge(@Context HttpServletRequest request, @QueryParam("name") String name,
 			@QueryParam("desc") String desc) throws SecurityException, IllegalStateException, NotSupportedException,
@@ -638,6 +642,294 @@ public class MyResource {
 			return "you're not signed in";
 		if (getUser(username).isAdmin()) {
 			return arrayToJson(DAO.getSugs());
+		} else
+			return "not authorized";
+	}
+
+	/**
+	 * Create a PPassage on a challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param chalId  (the challenge id path parameter)
+	 * @param name    (the name of ppassage query parameter)
+	 * 
+	 * @return the PPassage list of this challenge as an application/json response
+	 * @throws SecurityException
+	 * @throws IllegalStateException
+	 * @throws NamingException
+	 * @throws NotSupportedException
+	 * @throws SystemException
+	 * @throws RollbackException
+	 * @throws HeuristicMixedException
+	 * @throws HeuristicRollbackException
+	 */
+	@POST
+	@Path("/challenges/{chalId}/ppassage/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String postPpassage(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
+			@QueryParam("name") String name)
+			throws SecurityException, IllegalStateException, NamingException, NotSupportedException, SystemException,
+			RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			DAO.createPpassage(chalId, name);
+			return arrayToJson(getChal(chalId).getPps());
+		} else
+			return "not authorized";
+	}
+
+	/**
+	 * Get a pp on a challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param chalId  (the challenge id path parameter)
+	 * @param ppId    (the pp id path parameter)
+	 * 
+	 * @return the pp of the challenge as an application/json object
+	 */
+	@GET
+	@Path("/challenges/{chalId}/ppassage/{ppId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getPp(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
+			@PathParam("ppId") int ppId) {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			return getChal(chalId).getPp(ppId).toString();
+		} else
+			return "not authorized";
+	}
+
+	/**
+	 * Get a pp on a challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param chalId  (the challenge id path parameter)
+	 * @param ppId    (the pp id path parameter)
+	 * 
+	 * @return the pp of the challenge as an application/json object
+	 * @throws HeuristicRollbackException
+	 * @throws HeuristicMixedException
+	 * @throws RollbackException
+	 * @throws NamingException
+	 * @throws SystemException
+	 * @throws NotSupportedException
+	 * @throws IllegalStateException
+	 * @throws SecurityException
+	 */
+	@DELETE
+	@Path("/challenges/{chalId}/ppassage/{ppId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String delPp(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
+			@PathParam("ppId") int ppId) throws SecurityException, IllegalStateException, NotSupportedException,
+			SystemException, NamingException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			DAO.removePp(chalId, ppId);
+			return arrayToJson(getChal(chalId).getPps());
+		} else
+			return "not authorized";
+	}
+
+	/**
+	 * Create a new segment on a challenge with previous pp and next pp
+	 * 
+	 * @param request (context request for session handling)
+	 * @param chalId  (the challenge id path parameter)
+	 * @param name    (the segment name query parameter)
+	 * @param ppAvId  (the previous pp id query parameter)
+	 * @param ppApId  (the next pp id query parameter)
+	 * @param dist    (the previous pp id query parameter)
+	 * 
+	 * @return all the segments of the challenge as application/json objects
+	 * @throws SecurityException
+	 * @throws IllegalStateException
+	 * @throws NamingException
+	 * @throws NotSupportedException
+	 * @throws SystemException
+	 * @throws RollbackException
+	 * @throws HeuristicMixedException
+	 * @throws HeuristicRollbackException
+	 */
+	@POST
+	@Path("/challenges/{chalId}/segment/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String createSeg(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
+			@QueryParam("name") String name, @QueryParam("ppAvId") int ppAvId, @QueryParam("ppApId") int ppApId,
+			@QueryParam("dist") int dist)
+			throws SecurityException, IllegalStateException, NamingException, NotSupportedException, SystemException,
+			RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			DAO.createSeg(chalId, name, ppAvId, ppApId, dist);
+			return arrayToJson(getChal(chalId).getSegs());
+		} else
+			return "not authorized";
+	}
+
+	/**
+	 * Get a segment on a challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param chalId  (the challenge id path parameter)
+	 * @param segId   (the segment id path parameter)
+	 * 
+	 * @return the segment as an application/json object
+	 */
+	@GET
+	@Path("/challenges/{chalId}/segment/{segId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getSeg(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
+			@PathParam("segId") int segId) {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			return getChal(chalId).getSeg(segId).toString();
+		} else
+			return "not authorized";
+	}
+
+	/**
+	 * Delete a segment on a challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param chalId  (the challenge id path parameter)
+	 * @param segId   (the segment id path parameter)
+	 * 
+	 * @return remaining segments of the challenge as application/json objects
+	 * @throws NamingException
+	 * @throws HeuristicRollbackException
+	 * @throws HeuristicMixedException
+	 * @throws RollbackException
+	 * @throws SystemException
+	 * @throws NotSupportedException
+	 * @throws IllegalStateException
+	 * @throws SecurityException
+	 */
+	@DELETE
+	@Path("/challenges/{chalId}/segment/{segId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String delSeg(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
+			@PathParam("segId") int segId) throws SecurityException, IllegalStateException, NotSupportedException,
+			SystemException, RollbackException, HeuristicMixedException, HeuristicRollbackException, NamingException {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			DAO.removeSeg(chalId, segId);
+			return arrayToJson(getChal(chalId).getSegs());
+		} else
+			return "not authorized";
+	}
+
+	/**
+	 * Create an obstacle on a segment on a challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param chalId (the challenge id path parameter)
+	 * @param segId  (the segment id path parameter)
+	 * @param name (the obstacle name query parameter)
+	 * @param dist (the obstacle distance on the segment query parameter)
+	 * @param description (the obstacle description query parameter)
+	 * 
+	 * @return the obstacle on the segment on the challenge
+	 * @throws SecurityException
+	 * @throws IllegalStateException
+	 * @throws NamingException
+	 * @throws NotSupportedException
+	 * @throws SystemException
+	 * @throws RollbackException
+	 * @throws HeuristicMixedException
+	 * @throws HeuristicRollbackException
+	 */
+	@POST
+	@Path("/challenges/{chalId}/segment/{segId}/obstacle/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String addOb(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
+			@PathParam("segId") int segId, @QueryParam("name") String name, @QueryParam("dist") int dist,
+			@QueryParam("description") String description) throws SecurityException, IllegalStateException, NamingException, NotSupportedException, SystemException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			DAO.createOb(chalId, segId, name, dist, description);
+			return getChal(chalId).getSeg(segId).getOb().toString();
+		} else
+			return "not authorized";
+	}
+	
+	/**
+	 * Get an obstacle on a segment on a challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param chalId  (the challenge id path parameter)
+	 * @param segId   (the segment id path parameter)
+	 * 
+	 * @return the obstacle as an application/json object
+	 */
+	@GET
+	@Path("/challenges/{chalId}/segment/{segId}/obstacle/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getOb(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
+			@PathParam("segId") int segId) {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			if(getChal(chalId).getSeg(segId).getOb()!=null)
+				return getChal(chalId).getSeg(segId).getOb().toString();
+			else
+				return "no obstacle on this segment";
+		} else
+			return "not authorized";
+	}
+
+	/**
+	 * Delete a segment on a challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param chalId  (the challenge id path parameter)
+	 * @param segId   (the segment id path parameter)
+	 * 
+	 * @return remaining segments of the challenge as application/json objects
+	 * @throws NamingException
+	 * @throws HeuristicRollbackException
+	 * @throws HeuristicMixedException
+	 * @throws RollbackException
+	 * @throws SystemException
+	 * @throws NotSupportedException
+	 * @throws IllegalStateException
+	 * @throws SecurityException
+	 */
+	@DELETE
+	@Path("/challenges/{chalId}/segment/{segId}/obstacle/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String delOb(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
+			@PathParam("segId") int segId) throws SecurityException, IllegalStateException, NotSupportedException,
+			SystemException, RollbackException, HeuristicMixedException, HeuristicRollbackException, NamingException {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			DAO.removeOb(chalId, segId);
+			return "" + (getChal(chalId).getSeg(segId).getOb() == null);
 		} else
 			return "not authorized";
 	}

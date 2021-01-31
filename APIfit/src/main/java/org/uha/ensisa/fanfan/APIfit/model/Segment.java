@@ -4,22 +4,24 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Segment {
+
 	int sid;
+	String name;
 	Obstacle ob;
 	PPassage ppAv;
 	PPassage ppAp;
-	int size;
-	
+	int dist;
+
 	public Segment() {
-		
 	}
 
-	public Segment(int sid, PPassage ppAv, PPassage ppAp, int size) {
+	public Segment(int sid, String name, PPassage ppAv, PPassage ppAp, int dist) {
 		this.sid = sid;
+		this.name = name;
 		this.ob = null;
 		this.ppAv = ppAv;
 		this.ppAp = ppAp;
-		this.size = size;
+		this.dist = dist;
 	}
 
 	public int getSid() {
@@ -46,12 +48,12 @@ public class Segment {
 		this.ppAp = ppAp;
 	}
 
-	public int getSize() {
-		return size;
+	public int getDist() {
+		return dist;
 	}
 
-	public void setSize(int size) {
-		this.size = size;
+	public void setDist(int dist) {
+		this.dist = dist;
 	}
 
 	public Obstacle getOb() {
@@ -60,6 +62,12 @@ public class Segment {
 
 	public void setOb(Obstacle ob) {
 		this.ob = ob;
+	}
+
+	@Override
+	public String toString() {
+		return "{sid: " + sid + ", name: " + name + ", ob: " + ob + ", ppAv: " + ppAv + ", ppAp: " + ppAp + ", dist: "
+				+ dist + "}";
 	}
 
 }

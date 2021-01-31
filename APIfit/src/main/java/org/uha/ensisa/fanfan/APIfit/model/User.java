@@ -1,6 +1,7 @@
 package org.uha.ensisa.fanfan.APIfit.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ public class User {
 	String username;
 	String password;
 	boolean admin;
-	@ElementCollection  
+	@ElementCollection
 	ArrayList<Integer> challenges;
 
 	public User() {

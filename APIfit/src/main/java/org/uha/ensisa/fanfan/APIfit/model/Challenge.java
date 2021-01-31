@@ -108,10 +108,39 @@ public class Challenge {
 		this.segs = segs;
 	}
 
+	public PPassage getPp(int ppId) {
+		for (PPassage pp : getPps()) {
+			if (pp.getPpid() == ppId) {
+				return pp;
+			}
+		}
+		return null;
+	}
+	
+	public void removePp(int ppId){
+		pps.remove(getPp(ppId));
+	}
+	
+
+	public Segment getSeg(int segId) {
+		for (Segment seg : getSegs()) {
+			if (seg.getSid() == segId) {
+				return seg;
+			}
+		}
+		return null;
+	}
+	
+	public void removeSeg(int segId) {
+		segs.remove(getSeg(segId));	
+	}
+	
 	@Override
 	public String toString() {
 		return "{cid: " + cid + ", name: " + name + ", players: " + players + ", description: "+ description +"}";
 	}
+
+
 	
 	
 }

@@ -21,6 +21,9 @@ import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 
 import org.uha.ensisa.fanfan.APIfit.model.Challenge;
+import org.uha.ensisa.fanfan.APIfit.model.Obstacle;
+import org.uha.ensisa.fanfan.APIfit.model.PPassage;
+import org.uha.ensisa.fanfan.APIfit.model.Segment;
 import org.uha.ensisa.fanfan.APIfit.model.Suggestion;
 import org.uha.ensisa.fanfan.APIfit.model.User;
 
@@ -31,6 +34,15 @@ public class DAO implements ServletContextListener {
 
 	@PersistenceContext(unitName = "APIfit")
 	private static EntityManager em;
+
+	@Override
+	public void contextInitialized(ServletContextEvent sce) {
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		emfactory.close();
+	}
 
 	@Transactional(dontRollbackOn = Exception.class)
 	private static EntityManager getEntityManager() {
@@ -57,11 +69,6 @@ public class DAO implements ServletContextListener {
 		List<Suggestion> sugs = entitymanager.createQuery("from Suggestion s", Suggestion.class).getResultList();
 		entitymanager.close();
 		return sugs;
-	}
-
-	@Override
-	public void contextDestroyed(ServletContextEvent sce) {
-		emfactory.close();
 	}
 
 	public static void addChal(Challenge challenge)
@@ -207,13 +214,74 @@ public class DAO implements ServletContextListener {
 		entitymanager.persist(suggestion);
 		transaction.commit();
 		entitymanager.close();
+	}
+
+	public static void createPpassage(int chalId, String name)
+			throws NamingException, NotSupportedException, SystemException, SecurityException, IllegalStateException,
+			RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
+		transaction.begin();
+		EntityManager entitymanager = getEntityManager();
+		Challenge chal = getChal(chalId);
+		chal.addPP(new PPassage(chal.getPps().size(), name));
+		transaction.commit();
+		entitymanager.close();
+	}
+
+	public static void removePp(int chalId, int ppId)
+			throws NotSupportedException, SystemException, NamingException, SecurityException, IllegalStateException,
+			RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
+		transaction.begin();
+		EntityManager entitymanager = getEntityManager();
+		getChal(chalId).removePp(ppId);
+		transaction.commit();
+		entitymanager.close();
 
 	}
 
-	@Override
-	public void contextInitialized(ServletContextEvent sce) {
-		// TODO Auto-generated method stub
-		
+	public static void createSeg(int chalId, String name, int ppAvId, int ppApId, int size)
+			throws NamingException, NotSupportedException, SystemException, SecurityException, IllegalStateException,
+			RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
+		transaction.begin();
+		EntityManager entitymanager = getEntityManager();
+		Challenge chal = getChal(chalId);
+		chal.addSeg(new Segment(chal.getSegs().size(), name, chal.getPp(ppAvId), chal.getPp(ppApId), size));
+		transaction.commit();
+		entitymanager.close();
+	}
+
+	public static void removeSeg(int chalId, int segId)
+			throws NotSupportedException, SystemException, SecurityException, IllegalStateException, RollbackException,
+			HeuristicMixedException, HeuristicRollbackException, NamingException {
+		UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
+		transaction.begin();
+		EntityManager entitymanager = getEntityManager();
+		getChal(chalId).removeSeg(segId);
+		transaction.commit();
+		entitymanager.close();
+	}
+
+	public static void createOb(int chalId, int segId, String name, int dist, String description)
+			throws NamingException, NotSupportedException, SystemException, SecurityException, IllegalStateException,
+			RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
+		transaction.begin();
+		EntityManager entitymanager = getEntityManager();
+		Segment seg = getChal(chalId).getSeg(segId);
+		seg.setOb(new Obstacle(0, name, description, dist));
+		transaction.commit();
+		entitymanager.close();
+	}
+
+	public static void removeOb(int chalId, int segId) throws NamingException, NotSupportedException, SystemException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
+		transaction.begin();
+		EntityManager entitymanager = getEntityManager();
+		getChal(chalId).getSeg(segId).setOb(null);
+		transaction.commit();
+		entitymanager.close();
 	}
 
 }

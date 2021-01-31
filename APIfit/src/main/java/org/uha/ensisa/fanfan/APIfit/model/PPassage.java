@@ -6,12 +6,14 @@ import javax.persistence.Embeddable;
 public class PPassage {
 	
 	int ppid;
+	String name;
 	
 	public PPassage() {
 		
 	}
 	
-	public PPassage(int ppid) {
+	public PPassage(int ppid, String name) {
+		this.name = name;
 		this.ppid = ppid;
 	}
 	
@@ -22,4 +24,19 @@ public class PPassage {
 	public void setPpid(int ppid) {
 		this.ppid = ppid;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "{ppid: " + ppid + ", name: " + name + "}";
+	}
+	
+	
 }
