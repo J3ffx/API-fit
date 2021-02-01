@@ -5,7 +5,6 @@
         "version": "0.0.1-SNAPSHOT",
         "title": "APIfit"
     },
-    "host": "",
     "basePath": "/APIfit/",
     "schemes": [
         "http"
@@ -13,7 +12,8 @@
     "paths": {
         "/": {
             "get": {
-                "description": "Home page",
+            	"summary": "Home page",
+                "description": "Displaying of home page",
                 "consumes": [
                 ],
                 "produces": [
@@ -33,9 +33,10 @@
                 }
             }
         },
-        "/challenges": {
+        "/challenge": {
             "get": {
-                "description": "Get all challenges",
+            	"summary":"Get challenges",
+                "description": "Return all challenges from the database",
                 "consumes": [
                 ],
                 "produces": [
@@ -55,7 +56,8 @@
                 }
             },
             "post": {
-                "description": "Create a challenge",
+            	"summary": "Create challenge",
+                "description": "Insert a challenge in the database",
                 "consumes": [
                 ],
                 "produces": [
@@ -67,7 +69,7 @@
                         "name": "desc",
                         "in": "query",
                         "required": true,
-                        "description": "(description query parameter)\r                 Add challenge to list"
+                        "description": "(description query parameter)"
                     },
                     {
                         "type": "string",
@@ -89,9 +91,74 @@
                 }
             }
         },
-        "/challenges/{chalId}/ppassage": {
+        "/challenge/{chalId}": {
+            "get": {
+            	"summary": "Get challenge",
+                "description": "Return a specific challenge from the database with a chalId",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "(challenge id)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+            	"summary":"Edit challenge",
+                "description": "Edit the parameter of a specific challenge in the database",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "name": "players",
+                        "in": "query",
+                        "required": true,
+                        "description": "(max players number query parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/challenge/{chalId}/ppassage": {
             "post": {
-                "description": "Create a PPassage on a challenge",
+            	"summary": "Create PPassage",
+                "description": "Insert a PPassage in a challenge PPassage list in the database",
                 "consumes": [
                 ],
                 "produces": [
@@ -110,7 +177,7 @@
                         "name": "name",
                         "in": "query",
                         "required": true,
-                        "description": "(the name of ppassage query parameter)"
+                        "description": "(the name of PPassage query parameter)"
                     }
                 ],
                 "responses": {
@@ -125,9 +192,10 @@
                 }
             }
         },
-        "/challenges/{chalId}/ppassage/{ppId}": {
+        "/challenge/{chalId}/ppassage/{ppId}": {
             "get": {
-                "description": "Get a pp on a challenge",
+            	"summary": "Get a PPassage",
+                "description": "Return a specific PPassage on a specific challenge from database",
                 "consumes": [
                 ],
                 "produces": [
@@ -146,7 +214,7 @@
                         "name": "ppId",
                         "in": "path",
                         "required": true,
-                        "description": "(the pp id path parameter)"
+                        "description": "(the PPassage id path parameter)"
                     }
                 ],
                 "responses": {
@@ -161,7 +229,8 @@
                 }
             },
             "delete": {
-                "description": "Get a pp on a challenge",
+            	"summary": "Delete PPassage",
+                "description": "Remove a specific PPassage in a specific challenge from database and return remaining PPassage",
                 "consumes": [
                 ],
                 "produces": [
@@ -195,9 +264,10 @@
                 }
             }
         },
-        "/challenges/{chalId}/segment": {
+        "/challenge/{chalId}/segment": {
             "post": {
-                "description": "Create a new segment on a challenge with previous pp and next pp",
+            	"summary": "Create segment",
+                "description": "Insert a new segment in a challenge segment list from database",
                 "consumes": [
                 ],
                 "produces": [
@@ -216,7 +286,7 @@
                         "name": "dist",
                         "in": "query",
                         "required": true,
-                        "description": "(the previous pp id query parameter)"
+                        "description": "(the dist query parameter)"
                     },
                     {
                         "type": "string",
@@ -230,14 +300,14 @@
                         "name": "ppApId",
                         "in": "query",
                         "required": true,
-                        "description": "(the next pp id query parameter)"
+                        "description": "(the next PP id query parameter)"
                     },
                     {
                         "type": "integer",
                         "name": "ppAvId",
                         "in": "query",
                         "required": true,
-                        "description": "(the previous pp id query parameter)"
+                        "description": "(the previous PP id query parameter)"
                     }
                 ],
                 "responses": {
@@ -252,9 +322,10 @@
                 }
             }
         },
-        "/challenges/{chalId}/segment/{segId}": {
+        "/challenge/{chalId}/segment/{segId}": {
             "get": {
-                "description": "Get a segment on a challenge",
+            	"summary": "Get segment",
+                "description": "Return a specific segment on a specific challenge from database",
                 "consumes": [
                 ],
                 "produces": [
@@ -288,7 +359,8 @@
                 }
             },
             "delete": {
-                "description": "Delete a segment on a challenge",
+            	"summary": "Delete segment",
+                "description": "Remove a specific segment on a specific challenge from database",
                 "consumes": [
                 ],
                 "produces": [
@@ -322,9 +394,10 @@
                 }
             }
         },
-        "/challenges/{chalId}/segment/{segId}/obstacle": {
+        "/challenge/{chalId}/segment/{segId}/obstacle": {
             "get": {
-                "description": "Get an obstacle on a segment on a challenge",
+            	"summary": "Get obstacle",
+                "description": "Return the obstacle on a specific segment on a specific challenge",
                 "consumes": [
                 ],
                 "produces": [
@@ -358,7 +431,8 @@
                 }
             },
             "post": {
-                "description": "Create an obstacle on a segment on a challenge",
+            	"summary": "Create obstacle",
+                "description": "Insert an obstacle on a specific segment on a specific challenge",
                 "consumes": [
                 ],
                 "produces": [
@@ -413,7 +487,8 @@
                 }
             },
             "delete": {
-                "description": "Delete a segment on a challenge",
+            	"summary": "Delete obstacle",
+                "description": "Remove an obstacle on a specific segment on a specific challenge from database",
                 "consumes": [
                 ],
                 "produces": [
@@ -447,9 +522,10 @@
                 }
             }
         },
-        "/challenges/{id}": {
-            "get": {
-                "description": "Get a specific challenge",
+        "/challenge/{chalId}/subscribe": {
+            "post": {
+            	"summary": "Subscribe challenge",
+                "description": "Insert a specific challenge Id in the User challenge Id list",
                 "consumes": [
                 ],
                 "produces": [
@@ -458,44 +534,10 @@
                 "parameters": [
                     {
                         "type": "integer",
-                        "name": "id",
+                        "name": "chalId",
                         "in": "path",
                         "required": true,
-                        "description": "(challenge id)"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "description": "Modify the number of player for a specific challenge",
-                "consumes": [
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "description": "(challenge id path parameter)"
-                    },
-                    {
-                        "type": "integer",
-                        "name": "players",
-                        "in": "query",
-                        "required": true,
-                        "description": "(players number query parameter)\r                 Set the max player number"
+                        "description": "(id of challenge to subscribe to)"
                     }
                 ],
                 "responses": {
@@ -512,7 +554,8 @@
         },
         "/profile": {
             "get": {
-                "description": "Get profile of the connected user",
+            	"summary": "Get profile",
+                "description": "Return the profile of the connected user from database",
                 "consumes": [
                 ],
                 "produces": [
@@ -532,7 +575,8 @@
                 }
             },
             "put": {
-                "description": "Modification of profile informations",
+            	"summary": "Edit profile",
+                "description": "Edit the user informations from database",
                 "consumes": [
                 ],
                 "produces": [
@@ -544,7 +588,7 @@
                         "name": "password",
                         "in": "query",
                         "required": true,
-                        "description": "(password query parameter)\r                  Change profile data in db (here only password)"
+                        "description": "(password query parameter)"
                     },
                     {
                         "type": "string",
@@ -566,7 +610,8 @@
                 }
             },
             "delete": {
-                "description": "Remove profile of connected user",
+            	"summary": "Delete profile",
+                "description": "Remove the profile of connected user from database",
                 "consumes": [
                 ],
                 "produces": [
@@ -588,7 +633,8 @@
         },
         "/profile/progression": {
             "get": {
-                "description": "Retrieve all challenges that the user is subscribed to",
+            	"summary": "Get progression",
+                "description": "Return all challenges that the user is subscribed to from database",
                 "consumes": [
                 ],
                 "produces": [
@@ -610,7 +656,8 @@
         },
         "/signin": {
             "put": {
-                "description": "Check if username and password are stored to sign in",
+            	"summary": "Sign in",
+                "description": "Check if username and password are stored in database to sign in",
                 "consumes": [
                 ],
                 "produces": [
@@ -622,8 +669,8 @@
                         "name": "password",
                         "in": "query",
                         "required": true,
-                        "description": "(password query parameter)\r                  Check if username and password in db\r                  Add session attribute \"username\" with username value"
-                    },
+                        "description": "(password query parameter)"
+                        },
                     {
                         "type": "string",
                         "name": "username",
@@ -646,6 +693,7 @@
         },
         "/signout": {
             "put": {
+            	"summary": "Sign out",
                 "description": "Disconnect the connected user",
                 "consumes": [
                 ],
@@ -668,7 +716,8 @@
         },
         "/signup": {
             "post": {
-                "description": "Store an username and a password to create an account",
+            	"summary": "Create account",
+                "description": "Insert an username and a password in database to create an user",
                 "consumes": [
                 ],
                 "produces": [
@@ -680,7 +729,7 @@
                         "name": "password",
                         "in": "query",
                         "required": true,
-                        "description": "(password query parameter)\r                  Check if username in db\r                  Add session attribute \"username\" with username value\r                  Add username and password to db"
+                        "description": "(password query parameter)"
                     },
                     {
                         "type": "string",
@@ -702,38 +751,10 @@
                 }
             }
         },
-        "/subscribe": {
-            "post": {
-                "description": "Subscription to a challenge",
-                "consumes": [
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "name": "challenge",
-                        "in": "query",
-                        "required": true,
-                        "description": "(id of challenge to subscribe to)\r                 Add challenge to user challenge list"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/suggestion": {
             "get": {
-                "description": "Get all suggestions",
+            	"summary": "Get suggestions",
+                "description": "Return all suggestions from database",
                 "consumes": [
                 ],
                 "produces": [
@@ -753,7 +774,8 @@
                 }
             },
             "post": {
-                "description": "Suggestion of a theme for a challenge",
+            	"summary": "Create a suggestion",
+                "description": "Insert a suggestion in database",
                 "consumes": [
                 ],
                 "produces": [
@@ -765,7 +787,7 @@
                         "name": "theme",
                         "in": "query",
                         "required": true,
-                        "description": "(theme query parameter)\r                 Add the suggestion to suggestion list"
+                        "description": "(theme query parameter)"
                     }
                 ],
                 "responses": {
@@ -780,9 +802,10 @@
                 }
             }
         },
-        "/users": {
+        "/user": {
             "get": {
-                "description": "Get all users",
+            	"summary": "Get users",
+                "description": "Return all users form database",
                 "consumes": [
                 ],
                 "produces": [
@@ -802,9 +825,10 @@
                 }
             }
         },
-        "/users/{id}": {
+        "/user/{userId}": {
             "get": {
-                "description": "Retrieve targeted user",
+            	"summary": "Get user",
+                "description": "Return a specific user",
                 "consumes": [
                 ],
                 "produces": [
@@ -813,10 +837,9 @@
                 "parameters": [
                     {
                         "type": "integer",
-                        "name": "id",
+                        "name": "userId",
                         "in": "path",
-                        "required": true,
-                        "description": "(user id path parameter)"
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -831,7 +854,8 @@
                 }
             },
             "put": {
-                "description": "Modification of user informations",
+            	"summary": "Edit user",
+                "description": "Edit the user informations in database",
                 "consumes": [
                 ],
                 "produces": [
@@ -840,7 +864,7 @@
                 "parameters": [
                     {
                         "type": "integer",
-                        "name": "id",
+                        "name": "userId",
                         "in": "path",
                         "required": true
                     },
@@ -849,7 +873,7 @@
                         "name": "password",
                         "in": "query",
                         "required": true,
-                        "description": "(password query parameter)\r                  Change user data in db (here only password)"
+                        "description": "(password query parameter)"
                     }
                 ],
                 "responses": {
@@ -864,7 +888,8 @@
                 }
             },
             "delete": {
-                "description": "Delete targeted user",
+            	"summary": "Delete user",
+                "description": "Remove a specific user from database",
                 "consumes": [
                 ],
                 "produces": [
@@ -873,10 +898,9 @@
                 "parameters": [
                     {
                         "type": "integer",
-                        "name": "id",
+                        "name": "userId",
                         "in": "path",
-                        "required": true,
-                        "description": "(user id path parameter)"
+                        "required": true
                     }
                 ],
                 "responses": {

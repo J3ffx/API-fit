@@ -149,7 +149,7 @@ public class MyResource {
 	 * @return all available challenges as an application/json response
 	 */
 	@GET
-	@Path("/challenges/")
+	@Path("/challenge/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getChallenges() {
 		return arrayToJson(DAO.getChals());
@@ -163,7 +163,7 @@ public class MyResource {
 	 * @return the challenge as an application/json object
 	 */
 	@GET
-	@Path("/challenges/{id}/")
+	@Path("/challenge/{chalId}/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getChallenges(@PathParam("id") int id) {
 		return getChal(id).toString();
@@ -175,12 +175,6 @@ public class MyResource {
 	 * @param request  (context request for session handling)
 	 * @param username (username query parameter)
 	 * @param password (password query parameter)
-	 * 
-	 *                 Check if username in db
-	 * 
-	 *                 Add session attribute "username" with username value
-	 * 
-	 *                 Add username and password to db
 	 * 
 	 * @return a message as text/plain to confirm sign up
 	 * @throws NamingException
@@ -215,10 +209,6 @@ public class MyResource {
 	 * @param username (username query parameter)
 	 * @param password (password query parameter)
 	 * 
-	 *                 Check if username and password in db
-	 * 
-	 *                 Add session attribute "username" with username value
-	 * 
 	 * @return a message as text/plain to confirm sign in
 	 */
 	@PUT
@@ -243,8 +233,6 @@ public class MyResource {
 	 * 
 	 * @param request (context request for session handling)
 	 * 
-	 *                Get session attribute "username"
-	 * 
 	 * @return user profile as an application/json object
 	 */
 	@GET
@@ -265,8 +253,6 @@ public class MyResource {
 	 * 
 	 * @param request (context request for session handling)
 	 * 
-	 *                Remove session attribute "username"
-	 * 
 	 * @return a message as text/plain to confirm sign out
 	 */
 	@PUT
@@ -285,10 +271,6 @@ public class MyResource {
 	 * Remove profile of connected user
 	 * 
 	 * @param request (context request for session handling)
-	 * 
-	 *                Remove session attribute "username"
-	 * 
-	 *                Delete user data on db
 	 * 
 	 * @return a message as text/plain to confirm removing the profile
 	 * @throws HeuristicRollbackException
@@ -323,8 +305,6 @@ public class MyResource {
 	 * @param username (username query parameter)
 	 * @param password (password query parameter)
 	 * 
-	 *                 Change profile data in db (here only password)
-	 * 
 	 * @return a message as text/plain to confirm updating the profile
 	 * @throws HeuristicRollbackException
 	 * @throws HeuristicMixedException
@@ -356,8 +336,6 @@ public class MyResource {
 	 * @param request (context request for session handling)
 	 * @param chalId  (id of challenge to subscribe to)
 	 * 
-	 *                Add challenge to user challenge list
-	 * 
 	 * @return subscribed challenges as an application/json object
 	 * @throws NamingException
 	 * @throws HeuristicRollbackException
@@ -369,9 +347,9 @@ public class MyResource {
 	 * @throws SecurityException
 	 */
 	@POST
-	@Path("/subscribe/")
+	@Path("/challenge/{chalId}/subscribe/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String subChallenge(@Context HttpServletRequest request, @QueryParam("challenge") int chalId)
+	public String subChallenge(@Context HttpServletRequest request, @PathParam("chalId") int chalId)
 			throws SecurityException, IllegalStateException, NotSupportedException, SystemException, RollbackException,
 			HeuristicMixedException, HeuristicRollbackException, NamingException {
 		HttpSession session = request.getSession(true);
@@ -409,8 +387,6 @@ public class MyResource {
 	 * @param request (context request for session handling)
 	 * @param theme   (theme query parameter)
 	 * 
-	 *                Add the suggestion to suggestion list
-	 * 
 	 * @return the suggestion as an application/json object
 	 * @throws NamingException
 	 * @throws HeuristicRollbackException
@@ -446,7 +422,7 @@ public class MyResource {
 	 * @return all users as an application/json object
 	 */
 	@GET
-	@Path("/users/")
+	@Path("/user/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getUsers(@Context HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
@@ -468,15 +444,15 @@ public class MyResource {
 	 * @return the user as an application/json object
 	 */
 	@GET
-	@Path("/users/{id}/")
+	@Path("/user/{userId}/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getUser(@Context HttpServletRequest request, @PathParam("id") int id) {
+	public String getUser(@Context HttpServletRequest request, @PathParam("userId") int userId) {
 		HttpSession session = request.getSession(true);
 		String username = (String) session.getAttribute("username");
 		if (username == null)
 			return "you're not signed in";
 		if (getUser(username).isAdmin())
-			return getUser(id).toString();
+			return getUser(userId).toString();
 
 		else
 			return "not authorized";
@@ -499,9 +475,9 @@ public class MyResource {
 	 * @throws SecurityException
 	 */
 	@DELETE
-	@Path("/users/{id}/")
+	@Path("/user/{userId}/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String deleteUser(@Context HttpServletRequest request, @PathParam("id") int id)
+	public String deleteUser(@Context HttpServletRequest request, @PathParam("userId") int userId)
 			throws SecurityException, IllegalStateException, NotSupportedException, SystemException, NamingException,
 			RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		HttpSession session = request.getSession(true);
@@ -509,7 +485,7 @@ public class MyResource {
 		if (username == null)
 			return "you're not signed in";
 		if (getUser(username).isAdmin()) {
-			DAO.remove(id);
+			DAO.remove(userId);
 			return arrayToJson(DAO.getUsers());
 		} else
 			return "not authorized";
@@ -520,8 +496,6 @@ public class MyResource {
 	 * 
 	 * @param request  (context request for session handling)
 	 * @param password (password query parameter)
-	 * 
-	 *                 Change user data in db (here only password)
 	 * 
 	 * @return the user as an application/json object
 	 * @throws NamingException
@@ -534,9 +508,9 @@ public class MyResource {
 	 * @throws SecurityException
 	 */
 	@PUT
-	@Path("/users/{id}")
+	@Path("/user/{userId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String updateUser(@Context HttpServletRequest request, @PathParam("id") int id,
+	public String updateUser(@Context HttpServletRequest request, @PathParam("userId") int userId,
 			@QueryParam("password") String password)
 			throws SecurityException, IllegalStateException, NotSupportedException, SystemException, RollbackException,
 			HeuristicMixedException, HeuristicRollbackException, NamingException {
@@ -545,8 +519,8 @@ public class MyResource {
 		if (name == null)
 			return "you're not signed in";
 		if (getUser(name).isAdmin()) {
-			DAO.setPassword(id, password);
-			return getUser(id).toString();
+			DAO.setPassword(userId, password);
+			return getUser(userId).toString();
 		} else
 			return "not authorized";
 	}
@@ -557,8 +531,6 @@ public class MyResource {
 	 * @param request (context request for session handling)
 	 * @param name    (challenge name query parameter)
 	 * @param desc    (description query parameter)
-	 * 
-	 *                Add challenge to list
 	 * 
 	 * @return created challenge as an application/json object
 	 * @throws NamingException
@@ -571,7 +543,7 @@ public class MyResource {
 	 * @throws SecurityException
 	 */
 	@POST
-	@Path("/challenges/")
+	@Path("/challenge/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addChallenge(@Context HttpServletRequest request, @QueryParam("name") String name,
 			@QueryParam("desc") String desc) throws SecurityException, IllegalStateException, NotSupportedException,
@@ -596,8 +568,6 @@ public class MyResource {
 	 * @param id      (challenge id path parameter)
 	 * @param players (players number query parameter)
 	 * 
-	 *                Set the max player number
-	 * 
 	 * @return the modified challenge as an application/json object
 	 * @throws NamingException
 	 * @throws HeuristicRollbackException
@@ -609,9 +579,9 @@ public class MyResource {
 	 * @throws SecurityException
 	 */
 	@PUT
-	@Path("/challenges/{id}")
+	@Path("/challenge/{chalId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String modifyChallenge(@Context HttpServletRequest request, @PathParam("id") int id,
+	public String modifyChallenge(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
 			@QueryParam("players") int players) throws SecurityException, IllegalStateException, NotSupportedException,
 			SystemException, RollbackException, HeuristicMixedException, HeuristicRollbackException, NamingException {
 		HttpSession session = request.getSession(true);
@@ -619,8 +589,8 @@ public class MyResource {
 		if (username == null)
 			return "you're not signed in";
 		if (getUser(username).isAdmin()) {
-			DAO.setPlayers(id, players);
-			return getChal(id).toString();
+			DAO.setPlayers(chalId, players);
+			return getChal(chalId).toString();
 		} else
 			return "not authorized";
 	}
@@ -664,7 +634,7 @@ public class MyResource {
 	 * @throws HeuristicRollbackException
 	 */
 	@POST
-	@Path("/challenges/{chalId}/ppassage/")
+	@Path("/challenge/{chalId}/ppassage/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String postPpassage(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
 			@QueryParam("name") String name)
@@ -691,7 +661,7 @@ public class MyResource {
 	 * @return the pp of the challenge as an application/json object
 	 */
 	@GET
-	@Path("/challenges/{chalId}/ppassage/{ppId}")
+	@Path("/challenge/{chalId}/ppassage/{ppId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getPp(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
 			@PathParam("ppId") int ppId) {
@@ -723,7 +693,7 @@ public class MyResource {
 	 * @throws SecurityException
 	 */
 	@DELETE
-	@Path("/challenges/{chalId}/ppassage/{ppId}")
+	@Path("/challenge/{chalId}/ppassage/{ppId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String delPp(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
 			@PathParam("ppId") int ppId) throws SecurityException, IllegalStateException, NotSupportedException,
@@ -747,7 +717,7 @@ public class MyResource {
 	 * @param name    (the segment name query parameter)
 	 * @param ppAvId  (the previous pp id query parameter)
 	 * @param ppApId  (the next pp id query parameter)
-	 * @param dist    (the previous pp id query parameter)
+	 * @param dist    (the dist query parameter)
 	 * 
 	 * @return all the segments of the challenge as application/json objects
 	 * @throws SecurityException
@@ -760,7 +730,7 @@ public class MyResource {
 	 * @throws HeuristicRollbackException
 	 */
 	@POST
-	@Path("/challenges/{chalId}/segment/")
+	@Path("/challenge/{chalId}/segment/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String createSeg(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
 			@QueryParam("name") String name, @QueryParam("ppAvId") int ppAvId, @QueryParam("ppApId") int ppApId,
@@ -788,7 +758,7 @@ public class MyResource {
 	 * @return the segment as an application/json object
 	 */
 	@GET
-	@Path("/challenges/{chalId}/segment/{segId}")
+	@Path("/challenge/{chalId}/segment/{segId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getSeg(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
 			@PathParam("segId") int segId) {
@@ -820,7 +790,7 @@ public class MyResource {
 	 * @throws SecurityException
 	 */
 	@DELETE
-	@Path("/challenges/{chalId}/segment/{segId}")
+	@Path("/challenge/{chalId}/segment/{segId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String delSeg(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
 			@PathParam("segId") int segId) throws SecurityException, IllegalStateException, NotSupportedException,
@@ -857,7 +827,7 @@ public class MyResource {
 	 * @throws HeuristicRollbackException
 	 */
 	@POST
-	@Path("/challenges/{chalId}/segment/{segId}/obstacle/")
+	@Path("/challenge/{chalId}/segment/{segId}/obstacle/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addOb(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
 			@PathParam("segId") int segId, @QueryParam("name") String name, @QueryParam("dist") int dist,
@@ -883,7 +853,7 @@ public class MyResource {
 	 * @return the obstacle as an application/json object
 	 */
 	@GET
-	@Path("/challenges/{chalId}/segment/{segId}/obstacle/")
+	@Path("/challenge/{chalId}/segment/{segId}/obstacle/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getOb(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
 			@PathParam("segId") int segId) {
@@ -918,7 +888,7 @@ public class MyResource {
 	 * @throws SecurityException
 	 */
 	@DELETE
-	@Path("/challenges/{chalId}/segment/{segId}/obstacle/")
+	@Path("/challenge/{chalId}/segment/{segId}/obstacle/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String delOb(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
 			@PathParam("segId") int segId) throws SecurityException, IllegalStateException, NotSupportedException,
