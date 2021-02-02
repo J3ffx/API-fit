@@ -14,6 +14,7 @@
 		<class>org.uha.ensisa.fanfan.APIfit.model.Segment</class>
 		<class>org.uha.ensisa.fanfan.APIfit.model.PPassage</class>
 		<class>org.uha.ensisa.fanfan.APIfit.model.Obstacle</class>
+		<class>org.uha.ensisa.fanfan.APIfit.model.Tag</class>	
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<property name="eclipselink.ddl-generation"

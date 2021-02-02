@@ -1,6 +1,5 @@
 package org.uha.ensisa.fanfan.APIfit;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -131,7 +130,6 @@ public class DAO implements ServletContextListener {
 		user.setPassword(password);
 		transaction.commit();
 		entitymanager.close();
-
 	}
 
 	public static void remove(int id) throws NotSupportedException, SystemException, NamingException, SecurityException,
@@ -197,9 +195,7 @@ public class DAO implements ServletContextListener {
 		transaction.begin();
 		EntityManager entitymanager = getEntityManager();
 		User user = getUser(username);
-		ArrayList<Integer> chals = user.getChallenges();
-		chals.add(chalId);
-		user.setChallenges(chals);
+		user.addChall(chalId);
 		transaction.commit();
 		entitymanager.close();
 
@@ -275,11 +271,24 @@ public class DAO implements ServletContextListener {
 		entitymanager.close();
 	}
 
-	public static void removeOb(int chalId, int segId) throws NamingException, NotSupportedException, SystemException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
+	public static void removeOb(int chalId, int segId)
+			throws NamingException, NotSupportedException, SystemException, SecurityException, IllegalStateException,
+			RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
 		transaction.begin();
 		EntityManager entitymanager = getEntityManager();
 		getChal(chalId).getSeg(segId).setOb(null);
+		transaction.commit();
+		entitymanager.close();
+	}
+
+	public static void move(String username, int chalId, int move)
+			throws NotSupportedException, SystemException, SecurityException, IllegalStateException, RollbackException,
+			HeuristicMixedException, HeuristicRollbackException, NamingException {
+		UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
+		transaction.begin();
+		EntityManager entitymanager = getEntityManager();
+		getUser(username).move(chalId, move);
 		transaction.commit();
 		entitymanager.close();
 	}

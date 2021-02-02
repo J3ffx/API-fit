@@ -1,0 +1,949 @@
+
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1-SNAPSHOT",
+        "title": "APIfit"
+    },
+    "host": "",
+    "basePath": "/APIfit/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Home page",
+                "consumes": [
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/challenge": {
+            "get": {
+                "description": "Get all challenges",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "desc",
+                        "in": "query",
+                        "required": true,
+                        "description": "(description query parameter)"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "description": "(challenge name query parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/challenge/{chalId}": {
+            "get": {
+                "description": "Get a specific challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "(challenge id)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modify the number of player for a specific challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "name": "players",
+                        "in": "query",
+                        "required": true,
+                        "description": "(players number query parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Make the user move forward in the challenge selected",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "move",
+                        "in": "query",
+                        "required": true,
+                        "description": "(the distance traveled query parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/challenge/{chalId}/ppassage": {
+            "post": {
+                "description": "Create a PPassage on a challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "description": "(the name of ppassage query parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/challenge/{chalId}/ppassage/{ppId}": {
+            "get": {
+                "description": "Get a pp on a challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "ppId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the pp id path parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Get a pp on a challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "ppId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the pp id path parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/challenge/{chalId}/segment": {
+            "post": {
+                "description": "Create a new segment on a challenge with previous pp and next pp",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "dist",
+                        "in": "query",
+                        "required": true,
+                        "description": "(the dist query parameter)"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "description": "(the segment name query parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "ppApId",
+                        "in": "query",
+                        "required": true,
+                        "description": "(the next pp id query parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "ppAvId",
+                        "in": "query",
+                        "required": true,
+                        "description": "(the previous pp id query parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/challenge/{chalId}/segment/{segId}": {
+            "get": {
+                "description": "Get a segment on a challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "segId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the segment id path parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a segment on a challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "segId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the segment id path parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/challenge/{chalId}/segment/{segId}/obstacle": {
+            "get": {
+                "description": "Get an obstacle on a segment on a challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "segId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the segment id path parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create an obstacle on a segment on a challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "segId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the segment id path parameter)"
+                    },
+                    {
+                        "type": "string",
+                        "name": "description",
+                        "in": "query",
+                        "required": true,
+                        "description": "(the obstacle description query parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "dist",
+                        "in": "query",
+                        "required": true,
+                        "description": "(the obstacle distance on the segment query parameter)"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "description": "(the obstacle name query parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a segment on a challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "segId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the segment id path parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/challenge/{chalId}/subscribe": {
+            "post": {
+                "description": "Subscription to a challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(id of challenge to subscribe to)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/initialize": {
+            "post": {
+                "description": "Initialize user",
+                "consumes": [
+                ],
+                "produces": [
+                ],
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/profile": {
+            "get": {
+                "description": "Get profile of the connected user",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modification of profile informations",
+                "consumes": [
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "description": "(password query parameter)"
+                    },
+                    {
+                        "type": "string",
+                        "name": "username",
+                        "in": "query",
+                        "required": true,
+                        "description": "(username query parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove profile of connected user",
+                "consumes": [
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/profile/progression": {
+            "get": {
+                "description": "Retrieve all challenges that the user is subscribed to",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/signin": {
+            "put": {
+                "description": "Check if username and password are stored to sign in",
+                "consumes": [
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "description": "(password query parameter)"
+                    },
+                    {
+                        "type": "string",
+                        "name": "username",
+                        "in": "query",
+                        "required": true,
+                        "description": "(username query parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/signout": {
+            "put": {
+                "description": "Disconnect the connected user",
+                "consumes": [
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/signup": {
+            "post": {
+                "description": "Store an username and a password to create an account",
+                "consumes": [
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "description": "(password query parameter)"
+                    },
+                    {
+                        "type": "string",
+                        "name": "username",
+                        "in": "query",
+                        "required": true,
+                        "description": "(username query parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/suggestion": {
+            "get": {
+                "description": "Get all suggestions",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Suggestion of a theme for a challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "theme",
+                        "in": "query",
+                        "required": true,
+                        "description": "(theme query parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "description": "Get all users",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{userId}": {
+            "get": {
+                "description": "Retrieve targeted user",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modification of user informations",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "description": "(password query parameter)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete targeted user",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+    }
+}

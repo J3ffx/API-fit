@@ -140,7 +140,27 @@ public class MyResource {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getHome() {
-		return "try APIfit/challenges";
+		return "try APIfit/challenge";
+	}
+
+	/**
+	 * Initialize user
+	 * 
+	 * @throws SecurityException
+	 * @throws IllegalStateException
+	 * @throws RollbackException
+	 * @throws HeuristicMixedException
+	 * @throws HeuristicRollbackException
+	 * @throws SystemException
+	 * @throws NotSupportedException
+	 * @throws NamingException
+	 */
+	@POST
+	@Path("initialize")
+	public String init() throws SecurityException, IllegalStateException, RollbackException, HeuristicMixedException,
+			HeuristicRollbackException, SystemException, NotSupportedException, NamingException {
+		DAO.addUser(new User(0, "Jean", "naej42", true, 0));
+		return arrayToJson(DAO.getUsers());
 	}
 
 	/**
@@ -809,11 +829,11 @@ public class MyResource {
 	/**
 	 * Create an obstacle on a segment on a challenge
 	 * 
-	 * @param request (context request for session handling)
-	 * @param chalId (the challenge id path parameter)
-	 * @param segId  (the segment id path parameter)
-	 * @param name (the obstacle name query parameter)
-	 * @param dist (the obstacle distance on the segment query parameter)
+	 * @param request     (context request for session handling)
+	 * @param chalId      (the challenge id path parameter)
+	 * @param segId       (the segment id path parameter)
+	 * @param name        (the obstacle name query parameter)
+	 * @param dist        (the obstacle distance on the segment query parameter)
 	 * @param description (the obstacle description query parameter)
 	 * 
 	 * @return the obstacle on the segment on the challenge
@@ -831,7 +851,9 @@ public class MyResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addOb(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
 			@PathParam("segId") int segId, @QueryParam("name") String name, @QueryParam("dist") int dist,
-			@QueryParam("description") String description) throws SecurityException, IllegalStateException, NamingException, NotSupportedException, SystemException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
+			@QueryParam("description") String description)
+			throws SecurityException, IllegalStateException, NamingException, NotSupportedException, SystemException,
+			RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		HttpSession session = request.getSession(true);
 		String username = (String) session.getAttribute("username");
 		if (username == null)
@@ -842,7 +864,7 @@ public class MyResource {
 		} else
 			return "not authorized";
 	}
-	
+
 	/**
 	 * Get an obstacle on a segment on a challenge
 	 * 
@@ -862,7 +884,7 @@ public class MyResource {
 		if (username == null)
 			return "you're not signed in";
 		if (getUser(username).isAdmin()) {
-			if(getChal(chalId).getSeg(segId).getOb()!=null)
+			if (getChal(chalId).getSeg(segId).getOb() != null)
 				return getChal(chalId).getSeg(segId).getOb().toString();
 			else
 				return "no obstacle on this segment";
@@ -900,6 +922,42 @@ public class MyResource {
 		if (getUser(username).isAdmin()) {
 			DAO.removeOb(chalId, segId);
 			return "" + (getChal(chalId).getSeg(segId).getOb() == null);
+		} else
+			return "not authorized";
+	}
+
+	/********************************** MOBILE **********************************/
+
+	/**
+	 * Make the user move forward in the challenge selected
+	 * 
+	 * @param request (context request for session handling)
+	 * @param chalId  (the challenge id path parameter)
+	 * @param move    (the distance traveled query parameter)
+	 * 
+	 * @return chalsToString
+	 * @throws NamingException
+	 * @throws HeuristicRollbackException
+	 * @throws HeuristicMixedException
+	 * @throws RollbackException
+	 * @throws SystemException
+	 * @throws NotSupportedException
+	 * @throws IllegalStateException
+	 * @throws SecurityException
+	 */
+	@POST
+	@Path("/challenge/{chalId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String moveForward(@Context HttpServletRequest request, @PathParam("chalId") int chalId,
+			@QueryParam("move") int move) throws SecurityException, IllegalStateException, NotSupportedException,
+			SystemException, RollbackException, HeuristicMixedException, HeuristicRollbackException, NamingException {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			DAO.move(username, chalId, move);
+			return DAO.getUser(username).chalsToString();
 		} else
 			return "not authorized";
 	}

@@ -64,7 +64,7 @@
                         </td>
                     </tr>
                     <tr>
-                            <td class="swagger--summary-path" rowspan="2">
+                            <td class="swagger--summary-path" rowspan="3">
                                 <a href="#path--challenge--chalId-">/challenge/{chalId}</a>
                             </td>
                         <td>
@@ -72,6 +72,15 @@
                         </td>
                         <td>
                             <p>Get challenge</p>
+        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#operation--challenge--chalId--post">POST</a>
+                        </td>
+                        <td>
+                            <p>Move</p>
         
                         </td>
                     </tr>
@@ -355,49 +364,6 @@
             
                     
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">text/plain</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -415,49 +381,6 @@
             
                     
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
             <div id="operation--challenge-post" class="swagger--panel-operation-post panel">
@@ -520,49 +443,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -611,49 +491,68 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
+                </div>
+            </div>
+            <div id="operation--challenge--chalId--post" class="swagger--panel-operation-post panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">Move</div>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/challenge/{chalId}</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Make the user move forward in the challenge selected</p>
+            
+                    </section>
+            
                     
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                chalId
+                                            </td>
+                                            <td><p>(the challenge id path parameter)</p>
+                                        </td>
+                                            <td>path</td>
+                                            <td>
+                                        <span class="json-property-type">integer</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                move
+                                            </td>
+                                            <td><p>(the distance traveled query parameter)</p>
+                                        </td>
+                                            <td>query</td>
+                                            <td>
+                                        <span class="json-property-type">integer</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
                         </section>
+                    
                 </div>
             </div>
             <div id="operation--challenge--chalId--put" class="swagger--panel-operation-put panel">
@@ -715,49 +614,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -822,49 +678,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -929,49 +742,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
             <div id="operation--challenge--chalId--ppassage--ppId--get" class="swagger--panel-operation-get panel">
@@ -1034,49 +804,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -1189,49 +916,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -1296,49 +980,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
             <div id="operation--challenge--chalId--segment--segId--get" class="swagger--panel-operation-get panel">
@@ -1401,49 +1042,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -1508,49 +1106,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
             <div id="operation--challenge--chalId--segment--segId--obstacle-get" class="swagger--panel-operation-get panel">
@@ -1613,49 +1168,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
             <div id="operation--challenge--chalId--segment--segId--obstacle-post" class="swagger--panel-operation-post panel">
@@ -1766,49 +1278,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -1857,49 +1326,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -1917,49 +1343,6 @@
             
                     
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">text/plain</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
             <div id="operation--profile-get" class="swagger--panel-operation-get panel">
@@ -1975,49 +1358,6 @@
             
                     
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
             <div id="operation--profile-put" class="swagger--panel-operation-put panel">
@@ -2080,49 +1420,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">text/plain</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -2140,49 +1437,6 @@
             
                     
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -2247,49 +1501,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">text/plain</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -2307,49 +1518,6 @@
             
                     
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">text/plain</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -2414,49 +1582,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">text/plain</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -2474,49 +1599,6 @@
             
                     
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
             <div id="operation--suggestion-post" class="swagger--panel-operation-post panel">
@@ -2563,49 +1645,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -2623,49 +1662,6 @@
             
                     
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
         
@@ -2713,49 +1709,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
             <div id="operation--user--userId--get" class="swagger--panel-operation-get panel">
@@ -2801,49 +1754,6 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
             <div id="operation--user--userId--put" class="swagger--panel-operation-put panel">
@@ -2905,57 +1815,12 @@
                             </table>
                         </section>
                     
-                        <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> 
-                    </p>
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>OK</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                                <div  class="panel panel-definition">
-                                                    <div class="panel-body">
-                                                            
-                                                    </div>
-                                                </div></div>
-                                            
-                                                    <div class="col-md-12">
-                                                        <section class="sw-response-headers">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="sw-response-header-name"></th>
-                                                                    <th class="sw-response-header-description"></th>
-                                                                    <th class="sw-response-header-data-type"></th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
-                                                        </section>
-                                                    </div>
-                                            </div>                </dd>
-                            </dl>
-                        </section>
                 </div>
             </div>
     
      
     
                        
-        <h2>Schema definitions</h2>
-    
     
 </div>
 

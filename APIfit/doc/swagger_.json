@@ -20,17 +20,7 @@
                     "text/plain"
                 ],
                 "parameters": [
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/challenge": {
@@ -43,17 +33,7 @@
                     "application/json"
                 ],
                 "parameters": [
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             },
             "post": {
             	"summary": "Create challenge",
@@ -78,17 +58,7 @@
                         "required": true,
                         "description": "(challenge name query parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/challenge/{chalId}": {
@@ -108,17 +78,7 @@
                         "required": true,
                         "description": "(challenge id)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             },
             "put": {
             	"summary":"Edit challenge",
@@ -142,17 +102,32 @@
                         "required": true,
                         "description": "(max players number query parameter)"
                     }
+                ]
+            },
+            "post": {
+            	"summary": "Move",
+                "description": "Make the user move forward in the challenge selected",
+                "consumes": [
                 ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "move",
+                        "in": "query",
+                        "required": true,
+                        "description": "(the distance traveled query parameter)"
                     }
-                }
+                ]
             }
         },
         "/challenge/{chalId}/ppassage": {
@@ -179,17 +154,7 @@
                         "required": true,
                         "description": "(the name of PPassage query parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/challenge/{chalId}/ppassage/{ppId}": {
@@ -216,17 +181,7 @@
                         "required": true,
                         "description": "(the PPassage id path parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             },
             "delete": {
             	"summary": "Delete PPassage",
@@ -251,17 +206,7 @@
                         "required": true,
                         "description": "(the pp id path parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/challenge/{chalId}/segment": {
@@ -309,17 +254,7 @@
                         "required": true,
                         "description": "(the previous PP id query parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/challenge/{chalId}/segment/{segId}": {
@@ -346,17 +281,7 @@
                         "required": true,
                         "description": "(the segment id path parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             },
             "delete": {
             	"summary": "Delete segment",
@@ -381,17 +306,7 @@
                         "required": true,
                         "description": "(the segment id path parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/challenge/{chalId}/segment/{segId}/obstacle": {
@@ -418,17 +333,7 @@
                         "required": true,
                         "description": "(the segment id path parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             },
             "post": {
             	"summary": "Create obstacle",
@@ -474,17 +379,7 @@
                         "required": true,
                         "description": "(the obstacle name query parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             },
             "delete": {
             	"summary": "Delete obstacle",
@@ -509,17 +404,7 @@
                         "required": true,
                         "description": "(the segment id path parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/challenge/{chalId}/subscribe": {
@@ -539,17 +424,7 @@
                         "required": true,
                         "description": "(id of challenge to subscribe to)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/profile": {
@@ -562,17 +437,7 @@
                     "application/json"
                 ],
                 "parameters": [
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             },
             "put": {
             	"summary": "Edit profile",
@@ -597,17 +462,7 @@
                         "required": true,
                         "description": "(username query parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             },
             "delete": {
             	"summary": "Delete profile",
@@ -618,17 +473,7 @@
                     "text/plain"
                 ],
                 "parameters": [
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/profile/progression": {
@@ -641,17 +486,7 @@
                     "application/json"
                 ],
                 "parameters": [
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/signin": {
@@ -678,17 +513,7 @@
                         "required": true,
                         "description": "(username query parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/signout": {
@@ -701,17 +526,7 @@
                     "text/plain"
                 ],
                 "parameters": [
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/signup": {
@@ -738,17 +553,7 @@
                         "required": true,
                         "description": "(username query parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/suggestion": {
@@ -761,17 +566,7 @@
                     "application/json"
                 ],
                 "parameters": [
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             },
             "post": {
             	"summary": "Create a suggestion",
@@ -789,17 +584,7 @@
                         "required": true,
                         "description": "(theme query parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/user": {
@@ -812,17 +597,7 @@
                     "application/json"
                 ],
                 "parameters": [
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         },
         "/user/{userId}": {
@@ -841,17 +616,7 @@
                         "in": "path",
                         "required": true
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             },
             "put": {
             	"summary": "Edit user",
@@ -875,17 +640,7 @@
                         "required": true,
                         "description": "(password query parameter)"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             },
             "delete": {
             	"summary": "Delete user",
@@ -902,20 +657,8 @@
                         "in": "path",
                         "required": true
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {
-                        },
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                ]
             }
         }
-    },
-    "definitions": {
     }
 }
