@@ -4,7 +4,7 @@ API-fit is a REST API for running challenges for geeks.
 
 ## Installation
 
-The project repository is on GitHub on master : [APIfit](#https://github.com/J3ffx/API-fit/tree/master/APIfit).
+The project repository is on GitHub on master : [APIfit](https://github.com/J3ffx/API-fit/tree/master/APIfit).
 
 ### Requirements
 
@@ -135,7 +135,7 @@ To generate the Swagger.json file, follow those two steps :
 
 To generate the index.html with its CSS file of the documentation :
 
-1. Install bootprint-openapi with the steps [here](#https://github.com/bootprint/bootprint-openapi).
+1. Install bootprint-openapi with the steps [here](https://github.com/bootprint/bootprint-openapi).
 2. After generating the swagger.json file, replace it with the swagger.json file of APIfit/doc.
 3. Then on a terminal, run the following command :
 ```
@@ -153,7 +153,7 @@ bootprint openapi APIfit\doc\swagger.json APIfit\doc
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-Do not copy without permission. If help or questions are needed you can ask to the contributors : [Büsra DAGLI](#https://github.com/BusraDagli) and [Jérôme FANFAN](#https://github.com/J3ffx).
+Do not copy without permission. If help or questions are needed you can ask to the contributors : [Büsra DAGLI](https://github.com/BusraDagli) and [Jérôme FANFAN](https://github.com/J3ffx).
 We would like to thank the contributors of bootprint-openapi and those of jaxrs-analyser to help for our documentation.
 
 
