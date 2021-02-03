@@ -104,24 +104,31 @@ Also, we recommend you to check our persistence.xml file for JPA.
 * Create the MySQL database with Workbench:
 
 ```
-/asadmin create-jdbc-connection-pool --ping --restype javax.sql.DataSource --datasourceclassname com.mysql.cj.jdbc.MysqlDataSource --property user=root:password=xxx:DatabaseName=rvm_jsf:ServerName=127.0.0.1:port=3306:useSSL=false:zeroDateTimeBehavior=CONVERT_TO_NULL:useUnicode=true:serverTimezone=UTC:characterEncoding=UTF-8:useInformationSchema=true:nullCatalogMeansCurrent=true:nullNamePatternMatchesAll=false mysqlpool
+create database jpadb
 ```
 
-- Then follow those Payara commands :
+* Then follow those Payara commands in your glassfish/bin folder :
 
   - Start the server 
   
-    ```asadmin start-domain```
+    ```
+    asadmin start-domain
+    ```
   - Load the library
   
-    ```asadmin add-library mysql-connector-java-8.0.23.jar```
+    ```
+    asadmin add-library mysql-connector-java-8.0.23.jar
+    ```
   - Check the library is loaded
   
     ```asadmin list-libraries```
   - Create the pool on terminal
   
-    ```./asadmin create-jdbc-connection-pool --ping --restype javax.sql.DataSource --datasourceclassname com.mysql.cj.jdbc.MysqlDataSource --property user=root:password=xxx:DatabaseName=rvm_jsf:ServerName=127.0.0.1:port=3306:useSSL=false:zeroDateTimeBehavior=CONVERT_TO_NULL:useUnicode=true:serverTimezone=UTC:characterEncoding=UTF-8:useInformationSchema=true:nullCatalogMeansCurrent=true:nullNamePatternMatchesAll=false mysqlpool```
+    ```
+    ./asadmin create-jdbc-connection-pool --ping --restype javax.sql.DataSource --datasourceclassname com.mysql.cj.jdbc.MysqlDataSource --property user=root:password=root:DatabaseName=jpadb:ServerName=127.0.0.1:port=3306:useSSL=false:zeroDateTimeBehavior=CONVERT_TO_NULL:useUnicode=true:serverTimezone=UTC:characterEncoding=UTF-8:useInformationSchema=true:nullCatalogMeansCurrent=true:nullNamePatternMatchesAll=false mysqlpool
+    ```
 
+* Then you need to set the Payara JDBC Resource to connect this pool.
 
 ### How to Use
 
@@ -129,10 +136,18 @@ After running the application, you can put requests on POSTMAN to interact with 
 
 Some examples of requests : 
 
-* example 1
-
-* example 2
-* example 3
+* Sign up :
+```
+http://localhost:8080/APIfit/signin?username=Pierre&password=erreip42
+```
+* Get challenges :
+````
+http://localhost:8080/APIfit/challenge
+````
+* Suggest a theme :
+````
+http://localhost:8080/APIfit/suggestion?theme=Transformers
+````
 
 ## Generate a new documentation
 
