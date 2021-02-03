@@ -171,4 +171,4 @@ Do not copy without permission. If help or questions are needed you can ask to t
 We would like to thank the contributors of bootprint-openapi and those of jaxrs-analyser to help for our documentation.
 
 
-This project was made for the course **Application Internet Avancées** teached by Cédric WEMMERT at ENSISA (Université d'Haute Alsace).
+This project was made for the course «**Application Internet Avancées**» teached by Cédric WEMMERT at ENSISA (Université d'Haute Alsace).
