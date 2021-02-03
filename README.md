@@ -148,7 +148,7 @@ bootprint openapi APIfit\doc\swagger.json APIfit\doc
 
 ### Model package 
 
-![Model](Model.png)
+![Model](Model2.png)
 
 
 ## Contributing
