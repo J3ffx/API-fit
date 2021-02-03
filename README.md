@@ -148,7 +148,7 @@ bootprint openapi APIfit\doc\swagger.json APIfit\doc
 
 ### Model package 
 
-![Model](#https://github.com/J3ffx/API-fit/blob/main/Model.png?raw=true)
+![Model](Model.png)
 
 
 ## Contributing
