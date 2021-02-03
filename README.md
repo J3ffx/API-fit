@@ -121,7 +121,9 @@ create database jpadb
     ```
   - Check the library is loaded
   
-    ```asadmin list-libraries```
+    ```
+    asadmin list-libraries
+    ```
   - Create the pool on terminal
   
     ```
@@ -141,14 +143,17 @@ After running the application, you can put requests on POSTMAN to interact with 
 Some examples of requests : 
 
 * Sign up :
+@POST
 ```
 http://localhost:8080/APIfit/signin?username=Pierre&password=erreip42
 ```
 * Get challenges :
+@GET
 ```
 http://localhost:8080/APIfit/challenge
 ```
 * Suggest a theme :
+@POST
 ```
 http://localhost:8080/APIfit/suggestion?theme=Transformers
 ```
