@@ -1,6 +1,6 @@
 # API-fit
 
-API-fit is a REST API for running challenges for geeks.
+API-fit is a REST API for running challenges.
 
 ## Installation
 
@@ -13,7 +13,7 @@ To run the project you need :
 - A development environment : Eclipse (JEE version).
 - Payara as development environment, version : 5.2020.7
 - A specific Oracle JDK, version : 11.
-- MySQL Server.
+- MySQL Server, version : 8.0.23.
 
 > For a better use, we advise you to use POSTMAN and to download it on your Desktop.
 
@@ -99,15 +99,29 @@ Also, we recommend you to check our persistence.xml file for JPA.
 
 ## Running the application
 
-### Import the project 
-
-After importing the GitHub project, you have to create a Payara Server :
-
-> Right click on project > Run As > Run on Server
-
-*Do not forget to have Payara as Runtime and JPA on your Project Facets !*
-
 ### Launch MySQL Server
+
+* Create the MySQL database with Workbench:
+
+```
+/asadmin create-jdbc-connection-pool --ping --restype javax.sql.DataSource --datasourceclassname com.mysql.cj.jdbc.MysqlDataSource --property user=root:password=xxx:DatabaseName=rvm_jsf:ServerName=127.0.0.1:port=3306:useSSL=false:zeroDateTimeBehavior=CONVERT_TO_NULL:useUnicode=true:serverTimezone=UTC:characterEncoding=UTF-8:useInformationSchema=true:nullCatalogMeansCurrent=true:nullNamePatternMatchesAll=false mysqlpool
+```
+
+- Then follow those Payara commands :
+
+  - Start the server 
+  
+    ```asadmin start-domain```
+  - Load the library
+  
+    ```asadmin add-library mysql-connector-java-8.0.23.jar```
+  - Check the library is loaded
+  
+    ```asadmin list-libraries```
+  - Create the pool on terminal
+  
+    ```./asadmin create-jdbc-connection-pool --ping --restype javax.sql.DataSource --datasourceclassname com.mysql.cj.jdbc.MysqlDataSource --property user=root:password=xxx:DatabaseName=rvm_jsf:ServerName=127.0.0.1:port=3306:useSSL=false:zeroDateTimeBehavior=CONVERT_TO_NULL:useUnicode=true:serverTimezone=UTC:characterEncoding=UTF-8:useInformationSchema=true:nullCatalogMeansCurrent=true:nullNamePatternMatchesAll=false mysqlpool```
+
 
 ### How to Use
 
