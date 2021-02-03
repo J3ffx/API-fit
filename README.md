@@ -125,9 +125,11 @@ create database jpadb
   - Create the pool on terminal
   
     ```
-    ./asadmin create-jdbc-connection-pool --ping --restype javax.sql.DataSource --datasourceclassname com.mysql.cj.jdbc.MysqlDataSource --property 
-    user=root:password=root:DatabaseName=jpadb:ServerName=127.0.0.1:port=3306:useSSL=false:zeroDateTimeBehavior=CONVERT_TO_NULL:useUnicode=true:serverTimezone=UTC
-    :characterEncoding=UTF-8:useInformationSchema=true:nullCatalogMeansCurrent=true:nullNamePatternMatchesAll=false mysqlpool
+    ./asadmin create-jdbc-connection-pool --ping --restype javax.sql.DataSource --datasourceclassname 
+    com.mysql.cj.jdbc.MysqlDataSource --property user=root:password=root:DatabaseName=jpadb
+    :ServerName=127.0.0.1:port=3306:useSSL=false:zeroDateTimeBehavior=CONVERT_TO_NULL:useUnicode=true
+    :serverTimezone=UTC:characterEncoding=UTF-8:useInformationSchema=true:nullCatalogMeansCurrent=true
+    :nullNamePatternMatchesAll=false mysqlpool
     ```
 
 * Then you need to set the Payara JDBC Resource to connect this pool.
@@ -188,4 +190,4 @@ Do not copy without permission. If help or questions are needed you can ask to t
 We would like to thank the contributors of bootprint-openapi and those of jaxrs-analyser to help for our documentation.
 
 
-This project was made for the course «**Application Internet Avancées**» teached by Cédric WEMMERT at ENSISA (Université d'Haute Alsace).
+This project was made for the course «**Application Internet Avancées**» teached by [Cédric WEMMERT](https://github.com/wemmertc) at ENSISA (Université d'Haute Alsace).
