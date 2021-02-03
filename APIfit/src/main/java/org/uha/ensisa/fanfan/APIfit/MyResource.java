@@ -926,6 +926,39 @@ public class MyResource {
 			return "not authorized";
 	}
 
+	/**
+	 * Delete a challenge
+	 * 
+	 * @param request (context request for session handling)
+	 * @param chalId  (the challenge id path parameter)
+	 * 
+	 * @return remaining challenge list
+	 * @throws SecurityException
+	 * @throws IllegalStateException
+	 * @throws NotSupportedException
+	 * @throws SystemException
+	 * @throws RollbackException
+	 * @throws HeuristicMixedException
+	 * @throws HeuristicRollbackException
+	 * @throws NamingException
+	 */
+	@DELETE
+	@Path("/challenge/{chalId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String delChal(@Context HttpServletRequest request, @PathParam("chalId") int chalId)
+			throws SecurityException, IllegalStateException, NotSupportedException, SystemException, RollbackException,
+			HeuristicMixedException, HeuristicRollbackException, NamingException {
+		HttpSession session = request.getSession(true);
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+			return "you're not signed in";
+		if (getUser(username).isAdmin()) {
+			DAO.removeChal(chalId);
+			return arrayToJson(DAO.getChals());
+		} else
+			return "not authorized";
+	}
+
 	/********************************** MOBILE **********************************/
 
 	/**
@@ -955,10 +988,9 @@ public class MyResource {
 		String username = (String) session.getAttribute("username");
 		if (username == null)
 			return "you're not signed in";
-		if (getUser(username).isAdmin()) {
+		else {
 			DAO.move(username, chalId, move);
 			return DAO.getUser(username).chalsToString();
-		} else
-			return "not authorized";
+		}
 	}
 }

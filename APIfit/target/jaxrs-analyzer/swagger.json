@@ -183,6 +183,39 @@
                         }
                     }
                 }
+            },
+            "delete": {
+                "description": "Delete a challenge",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "segId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
             }
         },
         "/challenge/{chalId}/ppassage": {

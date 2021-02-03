@@ -128,6 +128,24 @@
                         "description": "(the distance traveled query parameter)"
                     }
                 ]
+            },
+            "delete": {
+            	"summary": "Delete challenge",
+                "description": "Delete a challenge from database",
+                "consumes": [
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "chalId",
+                        "in": "path",
+                        "required": true,
+                        "description": "(the challenge id path parameter)"
+                    }
+                ]
             }
         },
         "/challenge/{chalId}/ppassage": {

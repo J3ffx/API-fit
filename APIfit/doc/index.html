@@ -64,9 +64,18 @@
                         </td>
                     </tr>
                     <tr>
-                            <td class="swagger--summary-path" rowspan="3">
+                            <td class="swagger--summary-path" rowspan="4">
                                 <a href="#path--challenge--chalId-">/challenge/{chalId}</a>
                             </td>
+                        <td>
+                            <a href="#operation--challenge--chalId--delete">DELETE</a>
+                        </td>
+                        <td>
+                            <p>Delete challenge</p>
+        
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             <a href="#operation--challenge--chalId--get">GET</a>
                         </td>
@@ -447,6 +456,52 @@
             </div>
         
         <span id="path--challenge--chalId-"></span>
+            <div id="operation--challenge--chalId--delete" class="swagger--panel-operation-delete panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">Delete challenge</div>
+                    <h3 class="panel-title"><span class="operation-name">DELETE</span> <strong>/challenge/{chalId}</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Delete a challenge from database</p>
+            
+                    </section>
+            
+                    
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                chalId
+                                            </td>
+                                            <td><p>(the challenge id path parameter)</p>
+                                        </td>
+                                            <td>path</td>
+                                            <td>
+                                        <span class="json-property-type">integer</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                </div>
+            </div>
             <div id="operation--challenge--chalId--get" class="swagger--panel-operation-get panel">
                 <div class="panel-heading">
                     <div class="operation-summary">Get challenge</div>

@@ -172,7 +172,6 @@ public class DAO implements ServletContextListener {
 		entitymanager.remove(user);
 		transaction.commit();
 		entitymanager.close();
-
 	}
 
 	public static void setPassword(String username, String password)
@@ -293,4 +292,16 @@ public class DAO implements ServletContextListener {
 		entitymanager.close();
 	}
 
+	public static void removeChal(int chalId) throws NamingException, NotSupportedException, SystemException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
+		transaction.begin();
+		EntityManager entitymanager = getEntityManager();
+		Challenge chal = getChal(chalId);
+		if (!entitymanager.contains(chal)) {
+			chal = entitymanager.merge(chal);
+		}
+		entitymanager.remove(chal);
+		transaction.commit();
+		entitymanager.close();
+	}
 }
