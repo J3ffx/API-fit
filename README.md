@@ -178,7 +178,6 @@ To generate the index.html with its CSS file of the documentation :
 3. Then on a terminal, run the following command :
 ```
 bootprint openapi APIfit\doc\swagger.json APIfit\doc
-
 ```
 > Your swagger.json will be converted into a HTML file.
 
@@ -186,7 +185,7 @@ bootprint openapi APIfit\doc\swagger.json APIfit\doc
 
 ### Model package 
 
-![Model](Model.png)
+![Model](../main/Model.png)
 
 
 ## Contributing
