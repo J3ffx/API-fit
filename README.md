@@ -57,7 +57,7 @@ They have a profile they can access, modify information, subscribe to challenges
 They have a full access. They also can see all users, modify their information, unsubscribe a user, create a challenge, edit a challenge, set the number of players, import a virtual map, and see suggested themes of users.
 When an ADMIN creates a challenge, he/she has to create the CheckPoints, the Segments, the Obstacles with their objectives.
 
-Full routes and notes are available [here](#https://docs.google.com/document/d/1VyX63MnN7kr6DBpVu9fcWI3ou-p1KMbhRigDm-1UQCs/edit).
+Full routes and notes are available [here](https://docs.google.com/document/d/1VyX63MnN7kr6DBpVu9fcWI3ou-p1KMbhRigDm-1UQCs/edit).
 
 ### Dependencies and plugins
 
@@ -76,7 +76,7 @@ APIfit uses a main dependency :
 ```
 Pluging for the documentation :
 
-- JAXRS Analyser from [sdaschner](#https://github.com/sdaschner/jaxrs-analyzer)'s github :
+- JAXRS Analyser from [sdaschner](https://github.com/sdaschner/jaxrs-analyzer)'s github :
 
 ```
 <plugin>
