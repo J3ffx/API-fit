@@ -146,6 +146,9 @@ bootprint openapi APIfit\doc\swagger.json APIfit\doc
 
 ## UML
 
+### Model package 
+
+![](https://github.com/J3ffx/API-fit/blob/main/PackageModel.jpg)
 
 
 ## Contributing
