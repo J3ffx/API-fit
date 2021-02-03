@@ -125,7 +125,9 @@ create database jpadb
   - Create the pool on terminal
   
     ```
-    ./asadmin create-jdbc-connection-pool --ping --restype javax.sql.DataSource --datasourceclassname com.mysql.cj.jdbc.MysqlDataSource --property user=root:password=root:DatabaseName=jpadb:ServerName=127.0.0.1:port=3306:useSSL=false:zeroDateTimeBehavior=CONVERT_TO_NULL:useUnicode=true:serverTimezone=UTC:characterEncoding=UTF-8:useInformationSchema=true:nullCatalogMeansCurrent=true:nullNamePatternMatchesAll=false mysqlpool
+    ./asadmin create-jdbc-connection-pool --ping --restype javax.sql.DataSource --datasourceclassname com.mysql.cj.jdbc.MysqlDataSource --property 
+    user=root:password=root:DatabaseName=jpadb:ServerName=127.0.0.1:port=3306:useSSL=false:zeroDateTimeBehavior=CONVERT_TO_NULL:useUnicode=true:serverTimezone=UTC
+    :characterEncoding=UTF-8:useInformationSchema=true:nullCatalogMeansCurrent=true:nullNamePatternMatchesAll=false mysqlpool
     ```
 
 * Then you need to set the Payara JDBC Resource to connect this pool.
@@ -141,13 +143,13 @@ Some examples of requests :
 http://localhost:8080/APIfit/signin?username=Pierre&password=erreip42
 ```
 * Get challenges :
-````
+```
 http://localhost:8080/APIfit/challenge
-````
+```
 * Suggest a theme :
-````
+```
 http://localhost:8080/APIfit/suggestion?theme=Transformers
-````
+```
 
 ## Generate a new documentation
 
